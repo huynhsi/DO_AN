@@ -1,0 +1,25 @@
+.about--page{
+    display: flex;
+    margin-top: 10px;
+}
+.about--info {
+    margin-left: 10px;
+  
+}
+
+.about--info > h1{
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+.about--info > h4 {
+    margin-bottom: 20px;
+}
+.about--info > p{
+    margin-bottom: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.about--info > span {
+    font-style: italic;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}

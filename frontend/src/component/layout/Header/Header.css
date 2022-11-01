@@ -1,0 +1,120 @@
+.speedDial {
+  position: fixed;
+  right: 3vmax;
+  top: 5vmax;
+}
+
+.speedDialIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+a {
+  text-decoration: none;
+  color: #000000;
+}
+.container--header.fixed {
+  position: fixed !important;
+  transition: 1s ease-in;
+}
+.container--header {
+  position: relative;
+  background-color: #dfe1e5;
+  top: 0px;
+  /* left: 50px; */
+  width: 100%;
+  height: 8vmin;
+  z-index: 999999;
+  /* border-radius: 20px; */
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-around;
+  /* box-shadow: inset 0 5px 5px #ced0df, 0 -5px 10px #eff1f0, 0 10px 15px #cdd4de; */
+  box-shadow: inset 0px 2px 2px #ced0df, 0px 2px 2px #eff1f0,
+    1px 0px 12px #cdd4de;
+}
+.logo__nav > img {
+  width: 10vmax;
+  height: 100%;
+}
+.container__nav {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.container__nav > a {
+  font-weight: 520;
+  text-decoration: none;
+  color: black;
+  padding: 8px 6px;
+  border-radius: 5px;
+}
+.container__nav a.is-active,
+.container__nav a:hover {
+  background-color: #636871;
+}
+.is-active {
+  background-color: #636871;
+}
+.container__nav > a:hover {
+  background-color: #636871;
+}
+.home__nav {
+  color: black;
+}
+.form__nav {
+  display: flex;
+}
+.search__nav {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+.submmitButton__nav {
+  margin-left: 8px;
+  border: none;
+  border-radius: 8px;
+  /* background-color: #bbc2cd; */
+  box-shadow: inset 0 5px 5px #ced0df, 0 -5px 10px #eff1f0, 0 10px 15px #cdd4de;
+}
+.user__nav {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+.shopping__nav {
+  color: black;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+.seacrch__input {
+  display: flex;
+  justify-content: space-between;
+  height: 26px;
+
+  align-items: center;
+  width: 30vmax;
+  border-radius: 30px;
+  box-shadow: inset 0 5px 5px #ced0df, 0 -5px 10px #eff1f0, 0 10px 15px #cdd4de;
+  transition: 1s;
+}
+.seacrch__input > input {
+  outline: none;
+  border: none;
+  margin-left: 8px;
+  background-color: #eff1f0;
+  color: rgb(71, 67, 67);
+  font-style: italic;
+  opacity: 0.3;
+}
+.searchIcon {
+  margin-left: 5px;
+}
+.boxIcon {
+  color: black;
+}
+.cartIcon {
+  color: black;
+}
