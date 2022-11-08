@@ -17,124 +17,122 @@ import Loader from "../layout/Loader/Loader";
 import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateUser = () => {
+  const dispatch = useDispatch();
+  const alert = useAlert();
+  let navigate = useNavigate();
+  const { id } = useParams();
 
-    const dispatch = useDispatch();
-    const alert = useAlert();
-    let navigate = useNavigate();
-    const {id} = useParams();
-  
-    const { loading, error, user } = useSelector((state) => state.userDetails);
-  
-    const {
-      loading: updateLoading,
-      error: updateError,
-      isUpdated,
-    } = useSelector((state) => state.profile);
-  
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [role, setRole] = useState("");
-  
-    const userId = id;
-  
-    useEffect(() => {
-      if (user && user._id !== userId) {
-        dispatch(getUserDetails(userId));
-      } else {
-        setName(user.name);
-        setEmail(user.email);
-        setRole(user.role);
-      }
-      if (error) {
-        alert.error(error);
-        dispatch(clearErrors());
-      }
-  
-      if (updateError) {
-        alert.error(updateError);
-        dispatch(clearErrors());
-      }
-  
-      if (isUpdated) {
-        alert.success("User Updated Successfully");
-        navigate("/admin/users");
-        dispatch({ type: UPDATE_USER_RESET });
-      }
-    }, [dispatch, alert, error, isUpdated, updateError, user, userId]);
-  
-    const updateUserSubmitHandler = (e) => {
-      e.preventDefault();
-  
-      const myForm = new FormData();
-  
-      myForm.set("name", name);
-      myForm.set("email", email);
-      myForm.set("role", role);
-  
-      dispatch(updateUser(userId, myForm));
-    };
-  
+  const { loading, error, user } = useSelector((state) => state.userDetails);
+
+  const {
+    loading: updateLoading,
+    error: updateError,
+    isUpdated,
+  } = useSelector((state) => state.profile);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+
+  const userId = id;
+
+  useEffect(() => {
+    if (user && user._id !== userId) {
+      dispatch(getUserDetails(userId));
+    } else {
+      setName(user.name);
+      setEmail(user.email);
+      setRole(user.role);
+    }
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(clearErrors());
+    }
+
+    if (isUpdated) {
+      alert.success("User Updated Successfully");
+      navigate("/admin/users");
+      dispatch({ type: UPDATE_USER_RESET });
+    }
+  }, [dispatch, alert, error, isUpdated, updateError, user, userId]);
+
+  const updateUserSubmitHandler = (e) => {
+    e.preventDefault();
+
+    const myForm = new FormData();
+
+    myForm.set("name", name);
+    myForm.set("email", email);
+    myForm.set("role", role);
+
+    dispatch(updateUser(userId, myForm));
+  };
 
   return (
     <Fragment>
-    <MetaData title="Update User" />
-    <div className="dashboard">
-      <SideBar />
-      <div className="newProductContainer">
-        {loading ? (
-          <Loader />
-        ) : (
-          <form
-            className="createProductForm"
-            onSubmit={updateUserSubmitHandler}
-          >
-            <h1>CẬP NHẬT NGƯỜI DÙNG</h1>
-
-            <div>
-              <PersonIcon />
-              <input
-                type="text"
-                placeholder="Name"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <MailOutlineIcon />
-              <input
-                type="email"
-                placeholder="Email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <VerifiedUserIcon />
-              <select value={role} onChange={(e) => setRole(e.target.value)}>
-                <option value="">Chọn vai trò</option>
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-              </select>
-            </div>
-
-            <Button
-              id="createProductBtn"
-              type="submit"
-              disabled={
-                updateLoading ? true : false || role === "" ? true : false
-              }
+      <MetaData title="Cập nhật người dùng" />
+      <div className="dashboard">
+        <SideBar />
+        <div className="newProductContainer">
+          {loading ? (
+            <Loader />
+          ) : (
+            <form
+              className="createProductForm"
+              onSubmit={updateUserSubmitHandler}
             >
-              Cập Nhật
-            </Button>
-          </form>
-        )}
-      </div>
-    </div>
-  </Fragment>
-  )
-}
+              <h1>CẬP NHẬT NGƯỜI DÙNG</h1>
 
-export default UpdateUser
+              <div>
+                <PersonIcon />
+                <input
+                  type="text"
+                  placeholder="Tên"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div>
+                <MailOutlineIcon />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <VerifiedUserIcon />
+                <select value={role} onChange={(e) => setRole(e.target.value)}>
+                  <option value="">Chọn trạng thái</option>
+                  <option value="user">unblock</option>
+                  <option value="block">block</option>
+                </select>
+              </div>
+
+              <Button
+                id="createProductBtn"
+                type="submit"
+                disabled={
+                  updateLoading ? true : false || role === "" ? true : false
+                }
+              >
+                Cập Nhật
+              </Button>
+            </form>
+          )}
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+export default UpdateUser;

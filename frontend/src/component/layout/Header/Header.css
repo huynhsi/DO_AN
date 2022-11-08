@@ -27,6 +27,7 @@ a {
   z-index: 999999;
   /* border-radius: 20px; */
   display: flex;
+  align-items: center;
   margin-bottom: 10px;
   justify-content: space-around;
   /* box-shadow: inset 0 5px 5px #ced0df, 0 -5px 10px #eff1f0, 0 10px 15px #cdd4de; */
@@ -35,7 +36,9 @@ a {
 }
 .logo__nav > img {
   width: 10vmax;
-  height: 100%;
+  height: 36px;
+  align-items: center;
+  display: flex;
 }
 .container__nav {
   display: flex;
@@ -88,6 +91,7 @@ a {
   display: flex;
   align-items: center;
   margin-right: 10px;
+  position: relative;
 }
 .seacrch__input {
   display: flex;
@@ -104,10 +108,9 @@ a {
   outline: none;
   border: none;
   margin-left: 8px;
-  background-color: #eff1f0;
-  color: rgb(71, 67, 67);
+  background-color: #eff1f01a;
+  color: #4743431a;
   font-style: italic;
-  opacity: 0.3;
 }
 .searchIcon {
   margin-left: 5px;
@@ -117,4 +120,104 @@ a {
 }
 .cartIcon {
   color: black;
+}
+
+.mobile--list {
+  display: none;
+}
+.mobile-menu-icon {
+  display: none;
+}
+.number--on__iconcart {
+  position: absolute;
+  top: -6px;
+  right: -7px;
+  color: #ffffffff;
+  z-index: 999999999;
+  font-weight: 500;
+}
+.number--on__iconcart::after {
+  content: "";
+  position: absolute;
+  padding: 9px;
+  background-color: #ff000099;
+  border-radius: 50px;
+  right: -5px;
+  z-index: -1;
+}
+@media screen and (max-width: 780px) {
+  .mobile-menu-icon {
+    display: block;
+  }
+  .container--header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .logo__nav {
+    display: flex;
+  }
+  .container__nav {
+    display: none;
+  }
+  .search__nav {
+    display: none;
+  }
+  .user__nav {
+  }
+  .shopping__nav {
+  }
+
+  .nav--mobile--list {
+    position: absolute;
+    display: flex;
+    list-style: none;
+    background-color: #ced0df;
+    left: 0;
+    top: 38px;
+    transition: all 0.5s ease-in-out;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 0;
+    line-height: 35px;
+    z-index: 99999;
+  }
+  .mobile--list {
+    display: flex;
+    justify-content: end;
+    right: 2px;
+  }
+
+  .dropdown__trigger-2,
+  .dropdown__trigger {
+    display: none;
+  }
+  .home--brand__images {
+    height: 18px;
+    width: 20px;
+    object-fit: cover;
+    padding: 2px 18px;
+    border-radius: 5px;
+    margin: 20px 2px;
+    background-color: #dfe1e5;
+  }
+  .list img {
+    width: 122% !important;
+  }
+  .brand--logo__img > ul {
+    padding: 0px;
+  }
+  .content .item {
+    display: none;
+  }
+  .next {
+    top: 55%;
+  }
+  .container {
+    top: 33%;
+    height: 200px;
+  }
+  .banner {
+    height: 95vmin;
+  }
 }

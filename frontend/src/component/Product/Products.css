@@ -91,6 +91,9 @@
 
 /* resposdive */
 @media screen and (max-width: 600) {
+  .products {
+    padding: 0px 0px 0px 10vmax;
+  }
   .filterBox {
     width: 20vmax;
     position: static;

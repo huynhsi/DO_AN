@@ -34,9 +34,6 @@ const UpdatePassword = () => {
     myForm.set("newPassword", newPassword);
     myForm.set("confirmPassword", confirmPassword);
 
-    console.log(typeof oldPassword);
-    console.log(newPassword);
-    console.log(confirmPassword);
     dispatch(updatePassword(myForm));
   };
 

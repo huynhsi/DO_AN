@@ -89,7 +89,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("You have already delivered this order", 400));
   }
 
-  if (req.body.status === "Đang xử lý") {
+  if (req.body.status === "Xác nhận đơn hàng") {
     order.orderItems.forEach(async (o) => {
       await updateStock(o.product, o.quantity);
     });
@@ -99,11 +99,14 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
   if (req.body.status === "Đang giao") {
     order.orderStatus = "Đang giao";
   }
-  if (req.body.status === "Đang giao") {
-    order.orderStatus = "Đã giao";
+  if (req.body.status === "Chờ nhận hàng") {
+    order.orderStatus = "Chờ nhận hàng";
   }
-  if (req.body.status === "Đã giao") {
+  if (req.body.status === "Đã nhận") {
     order.orderStatus = "Đã nhận";
+  }
+  if (req.body.status === "Hủy đơn hàng") {
+    order.orderStatus = "Hủy đơn hàng";
   }
 
   await order.save({ validateBeforeSave: false });

@@ -19,6 +19,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import DiscountIcon from "@mui/icons-material/Discount";
 import StraightenIcon from "@mui/icons-material/Straighten";
 import BadgeIcon from "@mui/icons-material/Badge";
+import DateRangeIcon from "@mui/icons-material/DateRange";
 
 const UpdateProduct = () => {
   const dispatch = useDispatch();
@@ -58,6 +59,8 @@ const UpdateProduct = () => {
   const [sizename6, setSizeName6] = useState("");
   const [number7, setNumber7] = useState("");
   const [sizename7, setSizeName7] = useState("");
+  const [dateStart, setDateStart] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
 
   const categories = [
     "Nike",
@@ -80,6 +83,7 @@ const UpdateProduct = () => {
       setPrice(product.price);
       setCategory(product.category);
       setStock(product.Stock);
+
       setOldImages(product.images);
       setDiscount(product.discount);
       setnameImages(product.nameImages);
@@ -97,6 +101,8 @@ const UpdateProduct = () => {
       setSizeName6(product.size6[0] || "");
       setNumber7(product.size7[1] || "");
       setSizeName7(product.size7[0] || "");
+      setDateStart(product.datestart || "");
+      setDateEnd(product.dateend || "");
     }
     if (error) {
       alert.error(error);
@@ -141,10 +147,9 @@ const UpdateProduct = () => {
     myForm.set("Stock", Stock);
     myForm.set("discount", discount);
     myForm.set("nameImages", nameImages);
+    myForm.set("datestart", dateStart);
+    myForm.set("dateend", dateEnd);
 
-    // images.forEach((image) => {
-    //   myForm.append("files", image);
-    // });
     Object.values(images).forEach((image) => {
       myForm.append("files", image);
     });
@@ -322,23 +327,22 @@ const UpdateProduct = () => {
                 ))}
               </select>
 
-              {/* <DiscountIcon /> */}
-              <input
-                type="number"
-                placeholder="Khuyến mãi (%)"
-                value={discount}
-                onChange={(e) => setDiscount(e.target.value)}
-              />
-            </div>
-
-            <div className="name__price">
-              <StorageIcon />
               <input
                 type="number"
                 placeholder="Stock"
                 required
                 onChange={(e) => setStock(e.target.value)}
                 value={Stock}
+              />
+            </div>
+
+            <div className="name__price">
+              <DiscountIcon />
+              <input
+                type="number"
+                placeholder="Khuyến mãi (%)"
+                value={discount}
+                onChange={(e) => setDiscount(e.target.value)}
               />
 
               {/* <BadgeIcon /> */}
@@ -348,6 +352,20 @@ const UpdateProduct = () => {
                 required
                 value={nameImages}
                 onChange={(e) => setnameImages(e.target.value)}
+              />
+            </div>
+            <div className="name__price">
+              <DateRangeIcon />
+              <input
+                type="date"
+                placeholder="Ngày bắt đầu"
+                onChange={(e) => setDateStart(e.target.value)}
+              />
+
+              <input
+                type="date"
+                placeholder="Ngày kết thúc"
+                onChange={(e) => setDateEnd(e.target.value)}
               />
             </div>
 

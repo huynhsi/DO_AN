@@ -31,7 +31,14 @@ import {
   DELETE_REVIEW_SUCCESS,
   DELETE_REVIEW_FAIL,
   DELETE_REVIEW_RESET,
+  UPDATE_DISCOUNT_REQUEST,
+  UPDATE_DISCOUNT_SUCCESS,
+  UPDATE_DISCOUNT_FAIL,
+  UPDATE_DISCOUNT_RESET,
   CLEAR_ERRORS,
+  DELETE_DISCOUNT_RESET,
+  DELETE_DISCOUNT_SUCCESS,
+  DELETE_DISCOUNT_FAIL,
 } from "../constants/productConstants";
 
 export const productsReducer = (state = { products: [] }, action) => {
@@ -110,12 +117,15 @@ export const newProductReducer = (state = { product: {} }, action) => {
 export const productReducer = (state = {}, action) => {
   switch (action.type) {
     case DELETE_PRODUCT_REQUEST:
+    case DELETE_DISCOUNT_RESET:
     case UPDATE_PRODUCT_REQUEST:
+    case UPDATE_DISCOUNT_REQUEST:
       return {
         ...state,
         loading: true,
       };
     case DELETE_PRODUCT_SUCCESS:
+    case DELETE_DISCOUNT_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -123,24 +133,29 @@ export const productReducer = (state = {}, action) => {
       };
 
     case UPDATE_PRODUCT_SUCCESS:
+    case UPDATE_DISCOUNT_SUCCESS:
       return {
         ...state,
         loading: false,
         isUpdated: action.payload,
       };
     case DELETE_PRODUCT_FAIL:
+    case DELETE_DISCOUNT_FAIL:
     case UPDATE_PRODUCT_FAIL:
+    case UPDATE_DISCOUNT_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
     case DELETE_PRODUCT_RESET:
+    case DELETE_DISCOUNT_RESET:
       return {
         ...state,
         isDeleted: false,
       };
     case UPDATE_PRODUCT_RESET:
+    case UPDATE_DISCOUNT_RESET:
       return {
         ...state,
         isUpdated: false,
@@ -278,7 +293,3 @@ export const reviewReducer = (state = {}, action) => {
       return state;
   }
 };
-
-
-
-

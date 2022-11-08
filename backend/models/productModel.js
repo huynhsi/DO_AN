@@ -25,7 +25,7 @@ const productSchema = mongoose.Schema({
     default: 0,
   },
   images: [
-    { 
+    {
       url: {
         type: String,
         required: true,
@@ -43,15 +43,15 @@ const productSchema = mongoose.Schema({
     default: 1,
   },
   size1: [
-        {
-          type: Number,
-          default: null,
-        },
-        {
-          type: Number,
-          default: null,
-        },  
-  ],  
+    {
+      type: Number,
+      default: null,
+    },
+    {
+      type: Number,
+      default: null,
+    },
+  ],
   size2: [
     {
       type: Number,
@@ -60,61 +60,69 @@ const productSchema = mongoose.Schema({
     {
       type: Number,
       default: null,
-    },  
-],
-size3: [
-  {
-    type: Number,
-    default: null,
-  },
-  {
-    type: Number,
-    default: null,
-  },  
-],
-size4: [
-  {
-    type: Number,
-    default: null,
-  },
-  {
-    type: Number,
-    default: null,
-  },  
-],
-size5: [
-  {
-    type: Number,
-    default: null,
-  },
-  {
-    type: Number,
-    default: null,
-  },  
-],
-size6: [
-  {
-    type: Number,
-    default: null,
-  },
-  {
-    type: Number,
-    default: null,
-  },  
-],
-size7: [
-  {
-    type: Number,
-    default: null,
-  },
-  {
-    type: Number,
-    default: null,
-  },  
-],
-   
+    },
+  ],
+  size3: [
+    {
+      type: Number,
+      default: null,
+    },
+    {
+      type: Number,
+      default: null,
+    },
+  ],
+  size4: [
+    {
+      type: Number,
+      default: null,
+    },
+    {
+      type: Number,
+      default: null,
+    },
+  ],
+  size5: [
+    {
+      type: Number,
+      default: null,
+    },
+    {
+      type: Number,
+      default: null,
+    },
+  ],
+  size6: [
+    {
+      type: Number,
+      default: null,
+    },
+    {
+      type: Number,
+      default: null,
+    },
+  ],
+  size7: [
+    {
+      type: Number,
+      default: null,
+    },
+    {
+      type: Number,
+      default: null,
+    },
+  ],
+
   discount: {
     type: Number,
+    default: null,
+  },
+  datestart: {
+    type: Date,
+    default: null,
+  },
+  dateend: {
+    type: Date,
     default: null,
   },
   numOfReviews: {

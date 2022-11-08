@@ -17,6 +17,7 @@ import { storage } from "./firebase";
 import DiscountIcon from "@mui/icons-material/Discount";
 import StraightenIcon from "@mui/icons-material/Straighten";
 import BadgeIcon from "@mui/icons-material/Badge";
+import DateRangeIcon from "@mui/icons-material/DateRange";
 
 const NewProduct = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,8 @@ const NewProduct = () => {
   const [sizename6, setSizeName6] = useState("");
   const [number7, setNumber7] = useState("");
   const [sizename7, setSizeName7] = useState("");
+  const [dateStart, setDateStart] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
 
   const categories = [
     "Nike",
@@ -67,7 +70,7 @@ const NewProduct = () => {
 
     if (success) {
       alert.success("Product Created Successfully");
-      // navigate("/admin/dashboard");
+      navigate("/admin/dashboard");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, alert, error, success]);
@@ -98,35 +101,14 @@ const NewProduct = () => {
     myForm.set("Stock", Stock);
     myForm.set("discount", discount);
     myForm.set("nameImages", nameImages);
+    myForm.set("datestart", dateStart);
+    myForm.set("dateend", dateEnd);
 
-    // images.forEach((image) => {
-    //   myForm.append("files", image);
-    // });
     Object.values(images).forEach((image) => {
       myForm.append("files", image);
     });
     dispatch(createProduct(myForm));
   };
-
-  // const createProductImagesChange = (e) => {
-  //   const files = Array.from(e.target.files);
-
-  //   setImages([]);
-  //   setImagesPreview([]);
-
-  //   files.forEach((file) => {
-  //     const reader = new FileReader();
-
-  //     reader.onload = () => {
-  //       if (reader.readyState === 2) {
-  //         setImagesPreview((old) => [...old, reader.result]);
-  //         setImages((old) => [...old, reader.result]);
-  //       }
-  //     };
-
-  //     reader.readAsDataURL(file);
-  //   });
-  // };
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
@@ -152,7 +134,7 @@ const NewProduct = () => {
 
   return (
     <Fragment>
-      <MetaData title="Create Product" />
+      <MetaData title="Thêm Sản Phẩm Mới" />
       <div className="dashboard">
         <SideBar />
         <div className="newProductContainer">
@@ -302,6 +284,21 @@ const NewProduct = () => {
                 required
                 value={nameImages}
                 onChange={(e) => setnameImages(e.target.value)}
+              />
+            </div>
+            <div className="name__price">
+              <DateRangeIcon />
+              <input
+                type="date"
+                placeholder="Ngày bắt đầu"
+                onChange={(e) => setDateStart(e.target.value)}
+              />
+
+              <input
+                type="date"
+                placeholder="Ngày kết thúc"
+                onfocus="(this.type='date')"
+                onChange={(e) => setDateEnd(e.target.value)}
               />
             </div>
             <div id="createProductFormFile">

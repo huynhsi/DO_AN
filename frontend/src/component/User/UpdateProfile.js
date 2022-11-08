@@ -78,7 +78,7 @@ const UpdateProfile = () => {
         type: UPDATE_PROFILE_RESET,
       });
     }
-  }, [dispatch, error, alert, navigate, user, isUpdated]);
+  }, [dispatch, error, alert, user, isUpdated]);
   return (
     <Fragment>
       {loading ? (
@@ -88,7 +88,7 @@ const UpdateProfile = () => {
           <MetaData title="Update Profile" />
           <div className="updateProfileContainer">
             <div className="updateProfileBox">
-              <h2 className="updateProfileHeading">Update Profile</h2>
+              <h2 className="updateProfileHeading">Cập Nhật Thông Tin</h2>
 
               <form
                 className="updateProfileForm"

@@ -8,12 +8,6 @@ const cloudinary = require("cloudinary");
 
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-  //   folder: "avatars",
-  //   width: 150,
-  //   crop: "scale",
-  // });
-
   const files = await req.files;
   if (!files) {
     const error = new Error("Please choose files");
@@ -49,6 +43,10 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
   if (!user) {
     return next(new ErrorHander("Invalid email or password", 401));
+  }
+
+  if (user.role === "block") {
+    return next(new ErrorHander("You has been block", 401));
   }
 
   const isPasswordMatched = await user.comparePassword(password);
@@ -172,7 +170,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("password does not match", 400));
   }
 
-  user.password = await req.body.newPassword;
+  user.password = req.body.newPassword;
 
   await user.save();
 

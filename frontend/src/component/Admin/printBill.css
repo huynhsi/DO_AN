@@ -1,0 +1,37 @@
+#divcontents {
+  min-height: 80vh;
+}
+.printbill {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgb(255, 255, 255);
+  border-left: 1px solid rgba(0, 0, 0, 0.158);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+@media print {
+  /* Your print styles */
+  @page {
+    margin: 0;
+  }
+  body {
+    margin: 1.6cm;
+  }
+  #footer {
+    display: none;
+  }
+  .container--header {
+    display: none;
+  }
+  .sidebar {
+    display: none;
+  }
+  .speedDialIcon {
+    display: none !important;
+  }
+  .MuiFab-label {
+    display: none;
+  }
+}

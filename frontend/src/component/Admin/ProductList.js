@@ -17,8 +17,7 @@ import SideBar from "./Sidebar";
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
 
 const ProductList = () => {
-
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const alert = useAlert();
 
@@ -55,25 +54,32 @@ const ProductList = () => {
   }, [dispatch, alert, error, deleteError, isDeleted]);
 
   const columns = [
-    { field: "id", headerName: "Product ID", minWidth: 150, flex: 0.5 },
+    { field: "id", headerName: "ID", minWidth: 150, flex: 0.5 },
 
     {
       field: "name",
-      headerName: "Name",
+      headerName: "Tên",
       minWidth: 150,
-      flex: 1,
+      flex: 0.5,
+    },
+    {
+      field: "discount",
+      headerName: "Khuyến mãi",
+      type: "number",
+      minWidth: 50,
+      flex: 0.3,
     },
     {
       field: "stock",
-      headerName: "Stock",
+      headerName: "Kho",
       type: "number",
-      minWidth: 100,
+      minWidth: 50,
       flex: 0.3,
     },
 
     {
       field: "price",
-      headerName: "Price",
+      headerName: "Giá",
       type: "number",
       minWidth: 150,
       flex: 0.5,
@@ -82,7 +88,7 @@ const ProductList = () => {
     {
       field: "actions",
       flex: 0.3,
-      headerName: "Actions",
+      headerName: "Sửa",
       minWidth: 100,
       type: "number",
       sortable: false,
@@ -112,6 +118,7 @@ const ProductList = () => {
     products.forEach((item) => {
       rows.push({
         id: item._id,
+        discount: item.discount,
         stock: item.Stock,
         price: item.price.toFixed(3),
         name: item.name,
@@ -120,25 +127,25 @@ const ProductList = () => {
 
   return (
     <Fragment>
-    <MetaData title={`ALL PRODUCTS - Admin`} />
+      <MetaData title={`ALL PRODUCTS - Admin`} />
 
-    <div className="dashboard">
-      <SideBar />
-      <div className="productListContainer">
-        <h1 id="productListHeading">Tất cả sản phẩm</h1>
+      <div className="dashboard">
+        <SideBar />
+        <div className="productListContainer">
+          <h1 id="productListHeading">Tất cả sản phẩm</h1>
 
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={10}
-          disableSelectionOnClick
-          className="productListTable"
-          autoHeight
-        />
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={10}
+            disableSelectionOnClick
+            className="productListTable"
+            autoHeight
+          />
+        </div>
       </div>
-    </div>
-  </Fragment>
-  )
-}
+    </Fragment>
+  );
+};
 
-export default ProductList
+export default ProductList;

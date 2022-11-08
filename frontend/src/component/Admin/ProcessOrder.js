@@ -112,7 +112,9 @@ const ProcessOrder = () => {
 
                     <div>
                       <p>Giá:</p>
-                      <span>{order.totalPrice && order.totalPrice.toFixed(3)}</span>
+                      <span>
+                        {order.totalPrice && order.totalPrice.toFixed(3)}
+                      </span>
                     </div>
                   </div>
 
@@ -139,9 +141,9 @@ const ProcessOrder = () => {
                         <div key={item.product}>
                           <img src={`/../images/${item.image}`} alt="Product" />
                           <Link to={`/product/${item.product}`}>
-                            {item.name} &nbsp;&nbsp;&nbsp;&nbsp; size: {item.size}
+                            {item.name} &nbsp;&nbsp;&nbsp;&nbsp; size:{" "}
+                            {item.size}
                           </Link>{" "}
-                          
                           <span>
                             {item.quantity} X {item.price}đ ={" "}
                             <b>{(item.price * item.quantity).toFixed(3)}đ</b>
@@ -166,20 +168,27 @@ const ProcessOrder = () => {
                   <div>
                     <AccountTreeIcon />
                     <select onChange={(e) => setStatus(e.target.value)}>
-                      <option value="">Choose Category</option>
+                      <option value="">Chọn Danh Mục</option>
                       {order.orderStatus === "Đang xử lý" && (
-                        <option value="Đang giao">Đang gioa</option>
-                      )}
-                       {order.orderStatus === "Đang giao" && (
-                        <option value="Đã giao">Đang giao</option>
-                      )}
-                      {order.orderStatus === "Đã giao" && (
-                        <option value="Đã nhận">Đã giao</option>
-                      )}
-                       {order.orderStatus === "Hủy đơn hàng" && (
-                        <option value="Hủy đơn hàng">Đang giao</option>
+                        <option value="Xác nhận đơn hàng">
+                          Xác nhận đơn hàng
+                        </option>
+                        // (<option value="Hủy đơn hàng">Hủy đơn hàng</option>),
+                        // (<option value="Đang giao">Đang giao</option>),
+                        // (<option value="Chờ nhận hàng">Chờ nhận hàng</option>),
+                        // (<option value="Đã giao">Đã giao</option>)
                       )}
                       {order.orderStatus === "Đang xử lý" && (
+                        <option value="Hủy đơn hàng">Hủy đơn hàng</option>
+                      )}
+
+                      {order.orderStatus === "Xác nhận đơn hàng" && (
+                        <option value="Đang giao">Đang giao</option>
+                      )}
+                      {order.orderStatus === "Xác nhận đơn hàng" && (
+                        <option value="Chờ nhận hàng">Chờ nhận hàng</option>
+                      )}
+                      {order.orderStatus === "Xác nhận đơn hàng" && (
                         <option value="Đã nhận">Đã nhận</option>
                       )}
                     </select>
@@ -195,6 +204,9 @@ const ProcessOrder = () => {
                     Xử lý
                   </Button>
                 </form>
+                <Link to="/admin/order/printbill">
+                  <button className="creataBillBtn">In Hóa Đơn</button>
+                </Link>
               </div>
             </div>
           )}

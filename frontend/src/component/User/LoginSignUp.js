@@ -1,19 +1,18 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useRef, useState } from "react";
 import "./LoginSignUp.css";
 import Loader from "../layout/Loader/Loader";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import FaceIcon from "@material-ui/icons/Face";
-import { useDispatch, useSelector } from 'react-redux';
-import { useAlert } from 'react-alert';
-import { clearErrors,login,register } from '../../actions/userAction';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
+import { clearErrors, login, register } from "../../actions/userAction";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Ava from "../../images/Profile.png";
 
 const LoginSignUp = () => {
-
   const dispatch = useDispatch();
   const alert = useAlert();
   const location = useLocation();
@@ -55,7 +54,7 @@ const LoginSignUp = () => {
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("password", password);
-    Object.values(avatar).forEach(image=>{
+    Object.values(avatar).forEach((image) => {
       myForm.append("file", image);
     });
     dispatch(register(myForm));
@@ -78,46 +77,43 @@ const LoginSignUp = () => {
   //   }
   // };
 
-  const change = e => {
+  const change = (e) => {
     if (e.target.name === "file") {
-
       const files = Array.from(e.target.files);
 
-      setAvatar([])
-      setAvatarPreview([])
+      setAvatar([]);
+      setAvatarPreview([]);
 
       files.forEach((file) => {
         const reader = new FileReader();
-        
+
         reader.onload = () => {
           if (reader.readyState === 2) {
             setAvatarPreview((old) => [...old, reader.result]);
             setAvatar((old) => [...old, reader.result]);
           }
         };
-        
+
         reader.readAsDataURL(file);
       });
     } else {
       setUser({ ...user, [e.target.name]: e.target.value });
     }
-    
+
     setAvatar(e.target.files);
-    
-  }
+  };
 
   const redirect = location.search ? location.search.split("=")[1] : "/account";
-  
+
   useEffect(() => {
-    if (error){
+    if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-    if(isAuthenticated) {
+    if (isAuthenticated) {
       navigate(redirect);
     }
-  },[dispatch,error,alert,navigate,isAuthenticated,redirect]);
-
+  }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -136,89 +132,90 @@ const LoginSignUp = () => {
     }
   };
 
-
   return (
     <Fragment>
-      {loading ? (<Loader />) :
-        (<Fragment>
-          <div className='LoginSignUpContainer'>
-            <div className='LoginSignUpBox'>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          <div className="LoginSignUpContainer">
+            <div className="LoginSignUpBox">
               <div>
-                <div className='login_signUp_toggle'>
+                <div className="login_signUp_toggle">
                   <p onClick={(e) => switchTabs(e, "login")}>ĐĂNG NHẬP</p>
                   <p onClick={(e) => switchTabs(e, "register")}>ĐĂNG KÝ</p>
                 </div>
                 <button ref={switcherTab}></button>
               </div>
-    
-              <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
-                    <div className="loginEmail">
-                      <MailOutlineIcon />
-                      <input
-                        type="email"
-                        placeholder="Email"
-                        required
-                        value={loginEmail}
-                        onChange={(e) => setLoginEmail(e.target.value)}
-                      />
-                    </div>
-                    <div className="loginPassword">
-                      <LockOpenIcon />
-                      <input
-                        type="password"
-                        placeholder="Password"
-                        required
-                        value={loginPassword}
-                        onChange={(e) => setLoginPassword(e.target.value)}
-                      />
-                    </div>
-                    <Link to="/password/forgot">Quên mật khẩu ?</Link>
-                    <input type="submit" value="Login" className="loginBtn" />
-                  </form>
 
-                  <form
-                    action="/register"
-                    method="POST"
-                    className="signUpForm"
-                    ref={registerTab}
-                    encType="multipart/form-data"
-                    onSubmit={registerSubmit}
-                  >
-                    <div className="signUpName">
-                      <FaceIcon />
-                      <input
-                        type="text"
-                        placeholder="Name"
-                        required
-                        name="name"
-                        value={name}
-                        onChange={change}
-                      />
-                    </div>
-                    <div className="signUpEmail">
-                      <MailOutlineIcon />
-                      <input
-                        type="email"
-                        placeholder="Email"
-                        required
-                        name="email"
-                        value={email}
-                        onChange={change}
-                      />
-                    </div>
-                    <div className="signUpPassword">
-                      <LockOpenIcon />
-                      <input
-                        type="password"
-                        placeholder="Password"
-                        required
-                        name="password"
-                        value={password}
-                        onChange={change}
-                      />
-                    </div>
-    
-                  <div id="registerImage">
+              <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
+                <div className="loginEmail">
+                  <MailOutlineIcon />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    required
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                  />
+                </div>
+                <div className="loginPassword">
+                  <LockOpenIcon />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    required
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                  />
+                </div>
+                <Link to="/password/forgot">Quên mật khẩu ?</Link>
+                <input type="submit" value="Đăng nhập" className="loginBtn" />
+              </form>
+
+              <form
+                action="/register"
+                method="POST"
+                className="signUpForm"
+                ref={registerTab}
+                encType="multipart/form-data"
+                onSubmit={registerSubmit}
+              >
+                <div className="signUpName">
+                  <FaceIcon />
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    required
+                    name="name"
+                    value={name}
+                    onChange={change}
+                  />
+                </div>
+                <div className="signUpEmail">
+                  <MailOutlineIcon />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    required
+                    name="email"
+                    value={email}
+                    onChange={change}
+                  />
+                </div>
+                <div className="signUpPassword">
+                  <LockOpenIcon />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    required
+                    name="password"
+                    value={password}
+                    onChange={change}
+                  />
+                </div>
+
+                <div id="registerImage">
                   <img src={avatarPreview} alt="Avatar Preview" />
                   <input
                     type="file"
@@ -227,15 +224,14 @@ const LoginSignUp = () => {
                     onChange={change}
                   />
                 </div>
-                    <input type="submit" value="Register" className="signUpBtn" />
-                  </form>
-    
+                <input type="submit" value="Đăng ký" className="signUpBtn" />
+              </form>
             </div>
           </div>
-        </Fragment>)
-      }
+        </Fragment>
+      )}
     </Fragment>
-  )
-}
+  );
+};
 
-export default LoginSignUp
+export default LoginSignUp;

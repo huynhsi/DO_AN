@@ -1,6 +1,6 @@
 import React from "react";
 import "./sidebar.css";
-import logo from "../../images/Logoneker.png";
+import logo from "../../images/logoshop3.png";
 import { Link } from "react-router-dom";
 import { TreeView, TreeItem } from "@material-ui/lab";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -11,6 +11,7 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import RateReviewIcon from "@material-ui/icons/RateReview";
+import DiscountIcon from "@mui/icons-material/Discount";
 
 const Sidebar = () => {
   return (
@@ -48,6 +49,12 @@ const Sidebar = () => {
       <Link to="/admin/users">
         <p>
           <PeopleIcon /> Người Dùng
+        </p>
+      </Link>
+      <Link to="/admin/discount">
+        <p>
+          <DiscountIcon />
+          Khuyến Mãi
         </p>
       </Link>
       <Link to="/admin/reviews">

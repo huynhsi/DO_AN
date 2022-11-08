@@ -65,27 +65,27 @@ const ProductReviews = () => {
   }, [dispatch, alert, error, deleteError, isDeleted, productId]);
 
   const columns = [
-    { field: "id", headerName: "Review ID", minWidth: 200, flex: 0.5 },
+    { field: "id", headerName: "ID", minWidth: 100, flex: 0.5 },
 
     {
       field: "user",
-      headerName: "User",
-      minWidth: 200,
+      headerName: "Tên",
+      minWidth: 100,
       flex: 0.6,
     },
 
     {
       field: "comment",
-      headerName: "Comment",
-      minWidth: 350,
+      headerName: "Đánh giá",
+      minWidth: 300,
       flex: 1,
     },
 
     {
       field: "rating",
-      headerName: "Rating",
+      headerName: "Số sao",
       type: "number",
-      minWidth: 180,
+      minWidth: 100,
       flex: 0.4,
 
       cellClassName: (params) => {
@@ -98,8 +98,8 @@ const ProductReviews = () => {
     {
       field: "actions",
       flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
+      headerName: "Xóa",
+      minWidth: 100,
       type: "number",
       sortable: false,
       renderCell: (params) => {
@@ -175,7 +175,9 @@ const ProductReviews = () => {
               autoHeight
             />
           ) : (
-            <h1 className="productReviewsFormHeading">Không có đánh giá nào được tìm thấy!</h1>
+            <h1 className="productReviewsFormHeading">
+              Không có đánh giá nào được tìm thấy!
+            </h1>
           )}
         </div>
       </div>

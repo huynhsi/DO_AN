@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { CgMouse } from "react-icons/all";
 import "./Home.css";
 import ProductCard from "./ProductCard.js";
@@ -100,10 +101,10 @@ const Home = () => {
         <Fragment>
           <MetaData title="ECOMMERCE" />
           <div className="home--brand__content">
-            <div className="brand--size__price">
+            {/* <div className="brand--size__price">
               <div className="dropdown--size">
-                <div class="dropdown__trigger">Size</div>
-                <div class="dropdown__content">
+                <div className="dropdown__trigger">Size</div>
+                <div className="dropdown__content">
                   <ul>
                     <li>38</li>
                     <li>39</li>
@@ -116,8 +117,8 @@ const Home = () => {
                 </div>
               </div>
               <div className="dropdown--price">
-                <div class="dropdown__trigger-2">Price</div>
-                <div class="dropdown__content-2">
+                <div className="dropdown__trigger-2">Price</div>
+                <div className="dropdown__content-2">
                   <ul>
                     <li>250</li>
                     <li>300</li>
@@ -129,26 +130,38 @@ const Home = () => {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="brand--logo__img">
               <ul>
                 <li>
-                  <img className="home--brand__images" src={logoNike} />
+                  <Link to="/products">
+                    <img className="home--brand__images" src={logoNike} />
+                  </Link>
                 </li>
                 <li>
-                  <img className="home--brand__images" src={logoAdidas} />
+                  <Link to="/products">
+                    <img className="home--brand__images" src={logoAdidas} />
+                  </Link>
                 </li>
                 <li>
-                  <img className="home--brand__images" src={logoVans} />
+                  <Link to="/products">
+                    <img className="home--brand__images" src={logoVans} />
+                  </Link>
                 </li>
                 <li>
-                  <img className="home--brand__images" src={logConverse} />
+                  <Link to="/products">
+                    <img className="home--brand__images" src={logConverse} />
+                  </Link>
                 </li>
                 <li>
-                  <img className="home--brand__images" src={logJordan} />
+                  <Link to="/products">
+                    <img className="home--brand__images" src={logJordan} />
+                  </Link>
                 </li>
                 <li>
-                  <img className="home--brand__images" src={logPuma} />
+                  <Link to="/products">
+                    <img className="home--brand__images" src={logPuma} />
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -251,7 +264,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="dot">
-                <div id="dot_0" class="active"></div>
+                <div id="dot_0" className="active"></div>
                 <div id="dot_1"></div>
                 <div id="dot_2"></div>
               </div>

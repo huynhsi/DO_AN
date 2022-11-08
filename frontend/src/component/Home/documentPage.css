@@ -1,28 +1,29 @@
-.document--page{
-    display: flex;
-    flex-direction: column;
-    margin: 20px 20px;
-    padding: 40px 40px;
+.document--page {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 20px;
+  padding: 40px 40px;
 }
 .document--page > h3 {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    font-weight: 800;
-    color: #5c985c;
-   
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-weight: 800;
+  color: #5c985c;
 }
 .document--page > p {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
-.document--page > h4 , h5 {
-    margin-bottom: 10px;
-    text-decoration: underline;
+.document--page > h4,
+h5 {
+  margin-bottom: 10px;
+  text-decoration: underline;
 }
 .document--page > img {
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-    width: 60%;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  width: 60%;
+  margin-bottom: 20px;
+  margin: 0 auto;
 }

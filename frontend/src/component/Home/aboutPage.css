@@ -1,25 +1,33 @@
-.about--page{
-    display: flex;
-    margin-top: 10px;
+.about--page {
+  display: flex;
+  margin-top: 10px;
 }
 .about--info {
-    margin-left: 10px;
-  
+  margin-left: 10px;
 }
 
-.about--info > h1{
-    margin-bottom: 20px;
-    font-weight: 400;
+.about--info > h1 {
+  margin-bottom: 20px;
+  font-weight: 400;
 }
 .about--info > h4 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-.about--info > p{
-    margin-bottom: 10px;
-    font-family: 'Courier New', Courier, monospace;
+.about--info > p {
+  margin-bottom: 10px;
+  font-family: "Courier New", Courier, monospace;
 }
 .about--info > span {
-    font-style: italic;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
+  font-style: italic;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+@media screen and (max-width: 780px) {
+  .about--page {
+    display: block;
+  }
+  .about--map {
+    width: 100%;
+  }
 }

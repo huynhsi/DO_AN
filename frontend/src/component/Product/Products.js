@@ -28,8 +28,14 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 800]);
   const [category, setCategory] = useState("");
-  const [size1, setSize1] = useState("");
-  const [size4, setSize4] = useState("");
+  const [size1, setSize1] = useState(0);
+  const [size2, setSize2] = useState(0);
+  const [size3, setSize3] = useState(0);
+  const [size4, setSize4] = useState(0);
+  const [size5, setSize5] = useState(0);
+  const [size6, setSize6] = useState(0);
+  const [size7, setSize7] = useState(0);
+  const [discount, setDiscount] = useState(0);
 
   const [ratings, setRatings] = useState(0);
 
@@ -67,8 +73,13 @@ const Products = () => {
         price,
         category,
         size1,
+        size2,
+        size3,
         size4,
-
+        size5,
+        size6,
+        size7,
+        discount,
         ratings
       )
     );
@@ -79,8 +90,13 @@ const Products = () => {
     price,
     category,
     size1,
+    size2,
+    size3,
     size4,
-
+    size5,
+    size6,
+    size7,
+    discount,
     ratings,
     alert,
     error,
@@ -131,14 +147,24 @@ const Products = () => {
               <li className="category-link" onClick={() => setSize1(38)}>
                 S-38
               </li>
-              <li className="category-link">S-39</li>
-              <li className="category-link">S-40</li>
-              <li className="category-link" onClick={() => setSize4("41")}>
+              <li className="category-link" onClick={() => setSize2(39)}>
+                S-39
+              </li>
+              <li className="category-link" onClick={() => setSize3(40)}>
+                S-40
+              </li>
+              <li className="category-link" onClick={() => setSize4(41)}>
                 S-41
               </li>
-              <li className="category-link">S-42</li>
-              <li className="category-link">S-43</li>
-              <li className="category-link">S-44</li>
+              <li className="category-link" onClick={() => setSize5(42)}>
+                S-42
+              </li>
+              <li className="category-link" onClick={() => setSize6(43)}>
+                S-43
+              </li>
+              <li className="category-link" onClick={() => setSize7(44)}>
+                S-44
+              </li>
             </ul>
 
             <fieldset>

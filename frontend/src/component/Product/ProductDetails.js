@@ -67,9 +67,6 @@ const ProductDetails = () => {
     myForm.set("rating", rating);
     myForm.set("comment", comment);
     myForm.set("productId", id);
-    console.log(rating);
-    console.log(comment);
-    console.log(id);
 
     dispatch(newReview(myForm));
 
@@ -354,17 +351,18 @@ const ProductDetails = () => {
                     <button onClick={increaseQuantity}>+</button>
                   </div>
                   <button
+                    id="buttondis"
                     disabled={product.Stock < 1 ? true : false}
                     onClick={addToCartHandler}
                   >
-                    Add to Cart
+                    Thêm Vào Giỏ
                   </button>
                 </div>
 
                 <p>
-                  Trạng Thái:
+                  Trạng Thái:{" "}
                   <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                    {product.Stock < 1 ? "OutOfStock" : "InStock"}
+                    {product.Stock < 1 ? "Hết hàng" : "Còn hàng"}
                   </b>
                 </p>
               </div>

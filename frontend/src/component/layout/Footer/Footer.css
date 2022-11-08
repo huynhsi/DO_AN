@@ -74,3 +74,12 @@ footer {
 .rightFooter > a:hover {
   color: #eb4034;
 }
+
+@media screen and (max-width: 780px) {
+  .footer {
+    width: 100%;
+  }
+  .leftFooter > p {
+    display: none;
+  }
+}

@@ -36,26 +36,80 @@ const Dashboard = () => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
+  let totalsiz1 = 0;
+  products &&
+    products.forEach((item) => {
+      totalsiz1 += item.size1[1];
+    });
+
+  let totalsiz2 = 0;
+  products &&
+    products.forEach((item) => {
+      totalsiz2 += item.size2[1];
+    });
+
+  let totalsiz3 = 0;
+  products &&
+    products.forEach((item) => {
+      totalsiz3 += item.size3[1];
+    });
+
+  let totalsiz4 = 0;
+  products &&
+    products.forEach((item) => {
+      totalsiz4 += item.size4[1];
+    });
+
+  let totalsiz5 = 0;
+  products &&
+    products.forEach((item) => {
+      totalsiz5 += item.size5[1];
+    });
+
+  let totalsiz6 = 0;
+  products &&
+    products.forEach((item) => {
+      totalsiz6 += item.size6[1];
+    });
+
+  let totalsiz7 = 0;
+  products &&
+    products.forEach((item) => {
+      totalsiz7 += item.size7[1];
+    });
+
   let totalAmount = 0;
   orders &&
     orders.forEach((item) => {
       totalAmount += item.totalPrice;
     });
 
+  let tienhang = 0;
+  products &&
+    products.forEach((item) => {
+      tienhang += item.price;
+    });
+
   const lineState = {
-    labels: ["Initial Amount", "Amount Earned"],
+    labels: ["0", "TONG"],
     datasets: [
       {
-        label: "TOTAL AMOUNT",
+        label: "DOANH THU",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
         data: [0, totalAmount],
+      },
+      {
+        label: "TIEN HANG",
+        backgroundColor: ["blue"],
+        hoverBackgroundColor: ["rgb(197, 72, 49)"],
+        data: [0, tienhang],
       },
     ],
   };
 
   const doughnutState = {
-    labels: ["Out of Stock", "InStock"],
+    labels: ["Hết hàng", "Còn hàng"],
     datasets: [
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
@@ -66,33 +120,54 @@ const Dashboard = () => {
   };
   let totalcost = 0;
   const barState = {
-    labels: ["Nike", "Adidas", "Puma", "Vans", "Jordan"],
+    labels: [
+      "Size.38",
+      "Size.39",
+      "Size.40",
+      "Size.41",
+      "Size.42",
+      "size.43",
+      "size.44",
+    ],
     datasets: [
       {
-        label: "Dataset 1",
-        data: [7000, 5000, 15000, 7000, 9000],
+        label: "SIZE GIAY",
+        data: [
+          totalsiz1,
+          totalsiz2,
+          totalsiz3,
+          totalsiz4,
+          totalsiz5,
+          totalsiz6,
+          totalsiz7,
+        ],
         backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-      {
-        label: "Dataset 2",
-        data: [2000, 6000, 13000, 8000, 4000],
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
   return (
     <div className="dashboard">
-      <MetaData title="Dashboard - Admin Panel" />
+      <MetaData title="Thống kê - Admin" />
       <Sidebar />
 
       <div className="dashboardContainer">
         <Typography component="h1">Thống Kê</Typography>
+        <span>Thời Gian:</span>
+        <input
+          type="date"
+          name="begin"
+          placeholder="dd-mm-yyyy"
+          value=""
+          min="2021-01-01"
+          max="2022-12-31"
+        />
 
         <div className="dashboardSummary">
           <div>
             <p>
-              Doanh Thu <br /> {totalAmount.toFixed(3)}đ
+              Tổng Doanh Thu <br />
+              {totalAmount.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, "$&.")}đ
             </p>
           </div>
           <div className="dashboardSummaryBox2">

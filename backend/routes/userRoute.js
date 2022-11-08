@@ -31,11 +31,13 @@ router.route("/logout").get(logout);
 
 router.route("/me").get(isAuthenticatedUser, getUserDetails);
 
-router.route("/password/update").put(isAuthenticatedUser, updatePassword);
+router
+  .route("/password/update")
+  .put(upload.single("file"), isAuthenticatedUser, updatePassword);
 
 router
   .route("/me/update")
-  .put(upload.array("file", 2), isAuthenticatedUser, updateProfile);
+  .put(upload.single("file"), isAuthenticatedUser, updateProfile);
 
 router
   .route("/admin/users")
@@ -44,7 +46,12 @@ router
 router
   .route("/admin/user/:id")
   .get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser)
-  .put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole)
+  .put(
+    upload.single("file"),
+    isAuthenticatedUser,
+    authorizeRoles("admin"),
+    updateUserRole
+  )
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
 
 module.exports = router;
