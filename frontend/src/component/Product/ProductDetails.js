@@ -174,6 +174,8 @@ const ProductDetails = () => {
                 amount={24}
                 imagePath="../images"
                 fileName={`${product.nameImages}{index}.jpg`}
+                spinReverse
+                // autoplay
               />
             </div>
 
@@ -337,9 +339,16 @@ const ProductDetails = () => {
                         {product.price &&
                           (
                             product.price * [(100 - product.discount) / 100]
-                          ).toFixed(3)}{" "}
+                          ).toFixed(3)}
                         đ
                       </h1>
+                      <br />
+                      <span className="date--time__discount">{`Tu ngay ${String(
+                        product.datestart
+                      ).substr(0, 10)} đến hết ${String(product.dateend).substr(
+                        0,
+                        10
+                      )}`}</span>
                     </Fragment>
                   )}
                 </div>

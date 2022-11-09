@@ -72,8 +72,7 @@ const Cart = () => {
                         decreaseQuantity(item.product, item.quantity)
                       }
                     >
-                      {" "}
-                      -{" "}
+                      -
                     </button>
 
                     <input type="number" value={item.quantity} readOnly />

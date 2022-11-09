@@ -73,7 +73,8 @@ const NewProduct = () => {
       navigate("/admin/dashboard");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
-  }, [dispatch, alert, error, success]);
+    // navigate("/admin/products");
+  }, [dispatch, navigate, alert, error, success]);
 
   const createProductSubmitHandler = (e) => {
     e.preventDefault();

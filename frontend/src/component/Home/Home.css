@@ -635,8 +635,8 @@
   color: rgb(91, 161, 91);
 }
 .price-tag__discount {
-  background: #ff6b6c;
-  color: #fff;
+  background: #000000cc;
+  color: #ffffff;
   font-size: 10px;
   /* Center the price */
   align-items: center;
@@ -648,7 +648,7 @@
 
   /* Size */
   height: var(--price-tag-height);
-  width: 36%;
+  width: 25%;
   left: 0px;
   top: 0;
   /* Spacing */
@@ -716,6 +716,9 @@
 }
 .productCard:hover span {
   transform: translate(0px, 0px);
+}
+.productCard:hover .price-tag__discount {
+  transform: translate(0px, -33px);
 }
 
 .banner--ad__home {

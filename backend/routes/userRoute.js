@@ -37,7 +37,7 @@ router
 
 router
   .route("/me/update")
-  .put(upload.single("file"), isAuthenticatedUser, updateProfile);
+  .put(upload.array("file", 2), isAuthenticatedUser, updateProfile);
 
 router
   .route("/admin/users")

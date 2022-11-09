@@ -11,6 +11,8 @@ import { clearErrors, login, register } from "../../actions/userAction";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Ava from "../../images/Profile.png";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import ContactPhoneOutlinedIcon from "@mui/icons-material/ContactPhoneOutlined";
 
 const LoginSignUp = () => {
   const dispatch = useDispatch();
@@ -34,6 +36,9 @@ const LoginSignUp = () => {
     password: "",
   });
 
+  const [birthday, setBirthDay] = useState("");
+  const [phone, setPhone] = useState("");
+
   const { name, email, password } = user;
 
   const [avatar, setAvatar] = useState([]);
@@ -53,6 +58,8 @@ const LoginSignUp = () => {
 
     myForm.set("name", name);
     myForm.set("email", email);
+    myForm.set("birthday", birthday);
+    myForm.set("phone", phone);
     myForm.set("password", password);
     Object.values(avatar).forEach((image) => {
       myForm.append("file", image);
@@ -163,7 +170,7 @@ const LoginSignUp = () => {
                   <LockOpenIcon />
                   <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     required
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
@@ -185,7 +192,7 @@ const LoginSignUp = () => {
                   <FaceIcon />
                   <input
                     type="text"
-                    placeholder="Name"
+                    placeholder="Tên người dùng"
                     required
                     name="name"
                     value={name}
@@ -203,11 +210,32 @@ const LoginSignUp = () => {
                     onChange={change}
                   />
                 </div>
+                <div className="signUpName">
+                  <DateRangeIcon />
+                  <input
+                    type="date"
+                    required
+                    name="name"
+                    value={birthday}
+                    onChange={(e) => setBirthDay(e.target.value)}
+                  />
+                </div>
+                <div className="signUpName">
+                  <ContactPhoneOutlinedIcon />
+                  <input
+                    type="number"
+                    placeholder="Số điện thoại"
+                    required
+                    name="name"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
                 <div className="signUpPassword">
                   <LockOpenIcon />
                   <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     required
                     name="password"
                     value={password}
@@ -216,7 +244,7 @@ const LoginSignUp = () => {
                 </div>
 
                 <div id="registerImage">
-                  <img src={avatarPreview} alt="Avatar Preview" />
+                  <img src={avatarPreview} alt="" />
                   <input
                     type="file"
                     name="file"

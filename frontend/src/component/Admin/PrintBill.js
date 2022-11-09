@@ -21,141 +21,151 @@ const PrintBill = () => {
       <div className="dashboard">
         <SideBar />
         <div className="productListContainer">
-          <div>
-            <h1>Invoice</h1>
-            <address contenteditable>
-              <p>Jonathan Neal</p>
-              <p>
-                101 E. Chapman Ave
-                <br />
-                Orange, CA 92866
-              </p>
-              <p>(800) 555-1234</p>
-            </address>
-
-            <article>
-              <h1>Recipient</h1>
-              <address contenteditable>
-                <p>
-                  Some Company
-                  <br />
-                  c/o Some Guy
-                </p>
-              </address>
-              <table class="meta">
-                <tr>
-                  <th>
-                    <span contenteditable>Invoice #</span>
-                  </th>
-                  <td>
-                    <span contenteditable>101138</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <span contenteditable>Date</span>
-                  </th>
-                  <td>
-                    <span contenteditable>January 1, 2012</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <span contenteditable>Amount Due</span>
-                  </th>
-                  <td>
-                    <span id="prefix" contenteditable>
-                      $
-                    </span>
-                    <span>600.00</span>
-                  </td>
-                </tr>
-              </table>
-              <table class="inventory">
-                <thead>
-                  <tr>
-                    <th>
-                      <span contenteditable>Item</span>
-                    </th>
-                    <th>
-                      <span contenteditable>Description</span>
-                    </th>
-                    <th>
-                      <span contenteditable>Rate</span>
-                    </th>
-                    <th>
-                      <span contenteditable>Quantity</span>
-                    </th>
-                    <th>
-                      <span contenteditable>Price</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <a class="cut">-</a>
-                      <span contenteditable>Front End Consultation</span>
-                    </td>
-                    <td>
-                      <span contenteditable>Experience Review</span>
-                    </td>
-                    <td>
-                      <span data-prefix>$</span>
-                      <span contenteditable>150.00</span>
-                    </td>
-                    <td>
-                      <span contenteditable>4</span>
-                    </td>
-                    <td>
-                      <span data-prefix>$</span>
-                      <span>600.00</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <table class="balance">
-                <tr>
-                  <th>
-                    <span contenteditable>Total</span>
-                  </th>
-                  <td>
-                    <span data-prefix>$</span>
-                    <span>600.00</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <span contenteditable>Amount Paid</span>
-                  </th>
-                  <td>
-                    <span data-prefix>$</span>
-                    <span contenteditable>0.00</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <span contenteditable>Balance Due</span>
-                  </th>
-                  <td>
-                    <span data-prefix>$</span>
-                    <span>600.00</span>
-                  </td>
-                </tr>
-              </table>
-            </article>
-            <aside>
-              <h1>
-                <span contenteditable>Additional Notes</span>
-              </h1>
-              <div contenteditable>
-                <p>
-                  A finance charge of 1.5% will be made on unpaid balances after
-                  30 days.
-                </p>
+          <div className="wrapper">
+            <section className="invoice">
+              <div className="row">
+                <div className="col-12">
+                  <h2 className="page-header">
+                    <i className="fas fa-globe"></i> SHOPE_SHOSES.
+                    <small className="float-right">_.2022</small>
+                  </h2>
+                </div>
               </div>
-            </aside>
+
+              <div className="row invoice-info">
+                <div className="col-sm-4 invoice-col">
+                  <address>
+                    <strong>SHOPE_SHOSES.</strong>
+                    <br />
+                    đường 3/2, phường Xuân Khánh
+                    <br />
+                    quận Ninh Kiều, tp. Cần Thơ
+                    <br />
+                    Phone: (804) 123-5432
+                    <br />
+                    Email: huynhsi@gmail.com
+                  </address>
+                </div>
+                <hr />
+                <div className="col-sm-4 invoice-col">
+                  <address>
+                    <strong>Người mua địa chỉ</strong>
+                    <br />
+                    795 Folsom Ave, Suite 600
+                    <br />
+                    San Francisco, CA 94107
+                    <br />
+                    Phone: (555) 539-1037
+                    <br />
+                    Email: john.doe@example.com
+                  </address>
+                </div>
+
+                <div className="col-sm-4 invoice-col">
+                  <b>Invoice #007612</b>
+                  <br />
+                  <br />
+                  <b>Order ID:</b> 4F3S8J
+                  <br />
+                  <b>Payment Due:</b> 2/22/2014
+                  <br />
+                  <b>Account:</b> 968-34567
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-12 table-responsive">
+                  <table className="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Qty</th>
+                        <th>Product</th>
+                        <th>Serial #</th>
+                        <th>Description</th>
+                        <th>Subtotal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Call of Duty</td>
+                        <td>455-981-221</td>
+                        <td>
+                          El snort testosterone trophy driving gloves handsome
+                        </td>
+                        <td>$64.50</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>Need for Speed IV</td>
+                        <td>247-925-726</td>
+                        <td>Wes Anderson umami biodiesel</td>
+                        <td>$50.00</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>Monsters DVD</td>
+                        <td>735-845-642</td>
+                        <td>
+                          Terry Richardson helvetica tousled street art master
+                        </td>
+                        <td>$10.70</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>Grown Ups Blue Ray</td>
+                        <td>422-568-642</td>
+                        <td>Tousled lomo letterpress</td>
+                        <td>$25.99</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-6">
+                  <p className="lead">Payment Methods:</p>
+                  <img src="" alt="Visa" />
+                  <img src="" alt="Mastercard" />
+                  <img src="" alt="American Express" />
+                  <img src="" alt="Paypal" />
+
+                  <p className="text-muted well well-sm shadow-none">
+                    Etsy doostang zoodles disqus groupon greplin oooj voxy
+                    zoodles, weebly ning heekya handango imeem plugg dopplr
+                    jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                  </p>
+                </div>
+
+                <div className="col-6">
+                  <p className="lead">Amount Due 2/22/2014</p>
+
+                  <div className="table-responsive">
+                    <table className="table">
+                      <tbody>
+                        <tr>
+                          <th>Subtotal:</th>
+                          <td>$250.30</td>
+                        </tr>
+                        <tr>
+                          <th>Tax (9.3%)</th>
+                          <td>$10.34</td>
+                        </tr>
+                        <tr>
+                          <th>Shipping:</th>
+                          <td>$5.80</td>
+                        </tr>
+                        <tr>
+                          <th>Total:</th>
+                          <td>$265.24</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
           <button onClick={() => window.print()}>Print</button>
         </div>

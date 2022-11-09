@@ -14,18 +14,20 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     error.httpStatusCode = 400;
     return next(error);
   }
-  const { name, email, password } = req.body;
+  const { name, email, birthday, phone, password } = req.body;
 
   const user = await User.create({
     name,
     email,
+    birthday,
+    phone,
     password,
     avatar: {
       public_id: req.files[0].path,
       url: req.files[0].filename,
     },
   });
-  res.send(files);
+  res.send(files).json({ success: true });
   sendToken(user, 201, res);
 });
 
@@ -182,6 +184,8 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
+    birthday: req.body.birthday,
+    phone: req.body.phone,
   };
 
   const files = await req.files;
@@ -202,12 +206,10 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     useFindAndModify: false,
   });
 
-  res
-    .status(200)
-    .json({
-      success: true,
-    })
-    .send(files);
+  res.send(files).status(200).json({
+    success: true,
+    user,
+  });
 });
 
 // Get all users(admin)

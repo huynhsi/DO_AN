@@ -9,6 +9,8 @@ import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import ContactPhoneOutlinedIcon from "@mui/icons-material/ContactPhoneOutlined";
 
 const UpdateProfile = () => {
   const dispatch = useDispatch();
@@ -20,6 +22,8 @@ const UpdateProfile = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [birthday, setBirthDay] = useState("");
+  const [phone, setPhone] = useState("");
   const [avatar, setAvatar] = useState([]);
   const [avatarPreview, setAvatarPreview] = useState([]);
 
@@ -30,6 +34,8 @@ const UpdateProfile = () => {
 
     myForm.set("name", name);
     myForm.set("email", email);
+    myForm.set("birthday", birthday);
+    myForm.set("phone", phone);
     Object.values(avatar).forEach((image) => {
       myForm.append("file", image);
     });
@@ -61,6 +67,8 @@ const UpdateProfile = () => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setBirthDay(user.birthday);
+      setPhone(user.phone);
     }
 
     if (error) {
@@ -117,9 +125,30 @@ const UpdateProfile = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
+                <div className="updateProfileName">
+                  <DateRangeIcon />
+                  <input
+                    type="date"
+                    placeholder="Ngày sinh"
+                    name="name"
+                    value={birthday}
+                    onChange={(e) => setBirthDay(e.target.value)}
+                  />
+                </div>
+                <div className="updateProfileName">
+                  <ContactPhoneOutlinedIcon />
+                  <input
+                    type="number"
+                    placeholder="Số điện thoại"
+                    required
+                    name="name"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
 
                 <div id="updateProfileImage">
-                  <img src={avatarPreview} alt="Avatar Preview" />
+                  <img src={avatarPreview} alt="" />
                   <input
                     type="file"
                     name="file"

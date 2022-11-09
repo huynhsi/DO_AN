@@ -35,7 +35,8 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
       success: true,
       product,
     })
-    .send(files);
+    .send(files)
+    .json({ success: true });
 });
 
 // Get All Product
@@ -113,7 +114,9 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
       url: req.files[i].filename,
     });
   }
-  // req.body.images = imagesLinks;
+  if (imagesLinks.length !== 0) {
+    req.body.images = imagesLinks;
+  }
 
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -137,12 +140,6 @@ exports.updateDiscount = catchAsyncErrors(async (req, res, next) => {
   if (!product) {
     return next(new ErrorHander("Product not found", 404));
   }
-
-  const newdiscountData = {
-    discount: req.body.discont,
-    datestart: req.body.datestart,
-    dateend: req.body.dateend,
-  };
 
   product.discount = req.body.discont;
   product.datestart = req.body.datestart;

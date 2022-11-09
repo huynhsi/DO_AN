@@ -111,9 +111,13 @@ const ProcessOrder = () => {
                     </div>
 
                     <div>
-                      <p>Giá:</p>
+                      <p>Thành tiền:</p>
                       <span>
-                        {order.totalPrice && order.totalPrice.toFixed(3)}
+                        {order.totalPrice &&
+                          order.totalPrice
+                            .toFixed(3)
+                            .replace(/\d(?=(\d{3})+\.)/g, "$&.")}
+                        đ
                       </span>
                     </div>
                   </div>
@@ -134,7 +138,7 @@ const ProcessOrder = () => {
                   </div>
                 </div>
                 <div className="confirmCartItems">
-                  <Typography>Sản phẩm trong giỏ:</Typography>
+                  <Typography>Sản phẩm</Typography>
                   <div className="confirmCartItemsContainer">
                     {order.orderItems &&
                       order.orderItems.map((item) => (
@@ -145,7 +149,7 @@ const ProcessOrder = () => {
                             {item.size}
                           </Link>{" "}
                           <span>
-                            {item.quantity} X {item.price}đ ={" "}
+                            {`${item.quantity} X ${item.price}.đ =`}
                             <b>{(item.price * item.quantity).toFixed(3)}đ</b>
                           </span>
                         </div>

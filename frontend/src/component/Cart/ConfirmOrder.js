@@ -17,16 +17,20 @@ const ConfirmOrder = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
+  const subtotal =
+    cartItems.discount !== null && cartItems.discount !== 0
+      ? cartItems.reduce(
+          (acc, item) =>
+            acc + item.quantity * (item.price * [(100 - item.discount) / 100]),
+          0
+        )
+      : cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
-  const shippingCharges = subtotal > 1000 ? 0 : 200;
+  const shippingCharges = subtotal > 1000 ? 0 : 30;
 
   const tax = subtotal * 0.18;
 
-  const totalPrice = subtotal + tax + shippingCharges;
+  const totalPrice = subtotal + shippingCharges;
 
   const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`;
 
@@ -77,7 +81,7 @@ const ConfirmOrder = () => {
             <div className="confirmshippingAreaBox">
               <div>
                 <p>Tên:</p>
-                <span>user.name</span>
+                <span>{user.name}</span>
               </div>
               <div>
                 <p>Số điện thoại:</p>
@@ -90,18 +94,23 @@ const ConfirmOrder = () => {
             </div>
           </div>
           <div className="confirmCartItems">
-            <Typography>Sản phẩm trong giỏ:</Typography>
+            <Typography>Sản phẩm của bạn:</Typography>
             <div className="confirmCartItemsContainer">
               {cartItems &&
                 cartItems.map((item) => (
                   <div key={item.product}>
                     <img src={`/../images/${item.image}`} alt="Product" />
                     <Link to={`/product/${item.product}`}>
-                      {item.name}
+                      {`${item.name} -- size: ${item.size}`}
                     </Link>{" "}
                     <span>
-                      {item.quantity} X đ{item.price} ={" "}
-                      <b>đ{item.price * item.quantity}</b>
+                      {`${item.quantity} X ${item.price.toFixed(3)}đ =`}
+                      <b>
+                        {(item.price * item.quantity)
+                          .toFixed(3)
+                          .replace(/\d(?=(\d{3})+\.)/g, "$&.")}
+                        đ
+                      </b>
                     </span>
                   </div>
                 ))}
@@ -114,16 +123,18 @@ const ConfirmOrder = () => {
             <Typography>Tổng Quan Đặt Hàng</Typography>
             <div>
               <div>
-                <p>Tổng Giá Tiền:</p>
-                <span>{subtotal}đ</span>
+                <p>Giá sản phẩm:</p>
+                <span>
+                  {subtotal.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, "$&.")}đ
+                </span>
               </div>
               <div>
-                <p>Shipping Charges:</p>
-                <span>₹{shippingCharges}</span>
+                <p>Phí vần chuyển:</p>
+                <span>35.000đ || Miễn phí</span>
               </div>
               <div>
-                <p>Thuế sản phẩm đã bao gồm thuế:</p>
-                <span>{tax}đ</span>
+                <p>Giá sản phẩm đã bao gồm thuế</p>
+                <span>10%</span>
               </div>
             </div>
 
@@ -131,7 +142,9 @@ const ConfirmOrder = () => {
               <p>
                 <b>Thành Thiền:</b>
               </p>
-              <span>{totalPrice}đ</span>
+              <span>
+                {totalPrice.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, "$&.")}đ
+              </span>
             </div>
 
             <button className="normal__payment" onClick={proceedNormalPay}>

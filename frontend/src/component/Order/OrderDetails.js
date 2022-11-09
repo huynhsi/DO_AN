@@ -10,20 +10,18 @@ import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 
 const OrderDetails = () => {
+  const { order, error, loading } = useSelector((state) => state.orderDetails);
+  const dispatch = useDispatch();
+  const alert = useAlert();
+  const { id } = useParams();
 
-    const {order, error, loading } = useSelector((state) => state.orderDetails);
-    const dispatch = useDispatch();
-    const alert = useAlert();
-    const {id} = useParams();
-
-    useEffect(() => {
-        if(error) {
-            alert.error(error);
-            dispatch(clearErrors());
-        }
-        dispatch(getOrderDetails(id));
-    },[dispatch, alert, error, id]);
-
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+    dispatch(getOrderDetails(id));
+  }, [dispatch, alert, error, id]);
 
   return (
     <Fragment>
@@ -35,29 +33,29 @@ const OrderDetails = () => {
           <div className="orderDetailsPage">
             <div className="orderDetailsContainer">
               <Typography component="h1">
-                Order #{order && order._id}
+                Đơn hàng #{order && order._id}
               </Typography>
-              <Typography>Shipping Info</Typography>
+              <Typography>Địa chỉ giao hàng</Typography>
               <div className="orderDetailsContainerBox">
                 <div>
-                  <p>Name:</p>
+                  <p>Tên:</p>
                   <span>{order.user && order.user.name}</span>
                 </div>
                 <div>
-                  <p>Phone:</p>
+                  <p>Số điện thoại:</p>
                   <span>
                     {order.shippingInfo && order.shippingInfo.phoneNo}
                   </span>
                 </div>
                 <div>
-                  <p>Address:</p>
+                  <p>Địa chỉ:</p>
                   <span>
                     {order.shippingInfo &&
                       `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.state}, ${order.shippingInfo.pinCode}, ${order.shippingInfo.country}`}
                   </span>
                 </div>
               </div>
-              <Typography>Payment</Typography>
+              <Typography>Thanh toán</Typography>
               <div className="orderDetailsContainerBox">
                 <div>
                   <p
@@ -76,17 +74,22 @@ const OrderDetails = () => {
                 </div>
 
                 <div>
-                  <p>Amount:</p>
-                  <span>{order.totalPrice && order.totalPrice.toFixed(3)}</span>
+                  <p>Tổng thanh toán:</p>
+                  <span>
+                    {order.totalPrice &&
+                      order.totalPrice
+                        .toFixed(3)
+                        .replace(/\d(?=(\d{3})+\.)/g, "$&.")}
+                  </span>
                 </div>
               </div>
 
-              <Typography>Order Status</Typography>
+              <Typography>Trạng thái đơn hàng</Typography>
               <div className="orderDetailsContainerBox">
                 <div>
                   <p
                     className={
-                      order.orderStatus && order.orderStatus === "Delivered"
+                      order.orderStatus && order.orderStatus === "Đã nhận"
                         ? "greenColor"
                         : "redColor"
                     }
@@ -105,11 +108,10 @@ const OrderDetails = () => {
                     <div key={item.product}>
                       <img src={`/../images/${item.image}`} alt="Product" />
                       <Link to={`/product/${item.product}`}>
-                        {item.name} &nbsp;&nbsp;&nbsp;&nbsp; size: {item.size}
+                        {item.name} -- size: {item.size}
                       </Link>{" "}
-                       
                       <span>
-                        {item.quantity} X {item.price}đ ={" "}
+                        {`${item.quantity} X ${item.price.toFixed(3)}đ =`}
                         <b>{(item.price * item.quantity).toFixed(3)}đ</b>
                       </span>
                     </div>
@@ -120,7 +122,7 @@ const OrderDetails = () => {
         </Fragment>
       )}
     </Fragment>
-  )
-}
+  );
+};
 
-export default OrderDetails
+export default OrderDetails;

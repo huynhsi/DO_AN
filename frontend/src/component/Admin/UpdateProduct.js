@@ -85,7 +85,7 @@ const UpdateProduct = () => {
       setStock(product.Stock);
 
       setOldImages(product.images);
-      setDiscount(product.discount);
+      setDiscount(product.discount || "");
       setnameImages(product.nameImages);
       setNumber1(product.size1[1] || "");
       setSizeName1(product.size1[0] || "");
