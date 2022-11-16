@@ -326,7 +326,7 @@ const ProductDetails = () => {
 
               <div className="detailsBlock-3">
                 <div className="deailsBlock--price">
-                  {product.discount === null ? (
+                  {product.discount === null || product.discount === 0 ? (
                     <h1 className="deailsBlock--price__old">{`${
                       product.price && product.price.toFixed(3)
                     } đ`}</h1>

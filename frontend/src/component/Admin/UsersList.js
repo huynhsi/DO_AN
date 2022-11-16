@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,23 +9,27 @@ import MetaData from "../layout/MetaData";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
-import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
+import {
+  getAllUsers,
+  clearErrors,
+  deleteUser,
+  deleteUserCheck,
+} from "../../actions/userAction";
 import { DELETE_USER_RESET } from "../../constants/userConstants";
 
 const UsersList = () => {
   const dispatch = useDispatch();
-
   const alert = useAlert();
-
   const navigate = useNavigate();
 
   const { error, users } = useSelector((state) => state.allUsers);
-
   const {
     error: deleteError,
     isDeleted,
     message,
   } = useSelector((state) => state.profile);
+
+  const [selectionModel, setSelectionModel] = useState([]);
 
   const deleteUserHandler = (id) => {
     dispatch(deleteUser(id));
@@ -52,13 +56,19 @@ const UsersList = () => {
   }, [dispatch, alert, error, deleteError, isDeleted, message]);
 
   const columns = [
-    { field: "id", headerName: "ID", minWidth: 100, flex: 0.8 },
+    { field: "id", headerName: "ID", minWidth: 100, flex: 0.7 },
 
     {
       field: "email",
       headerName: "Email",
       minWidth: 100,
-      flex: 1,
+      flex: 0.5,
+    },
+    {
+      field: "lastLogin",
+      headerName: "Đã đăng nhập",
+      minWidth: 100,
+      flex: 0.7,
     },
     {
       field: "name",
@@ -72,7 +82,7 @@ const UsersList = () => {
       headerName: "Trạng thái",
       type: "number",
       minWidth: 100,
-      flex: 0.3,
+      flex: 0.5,
       cellClassName: (params) => {
         return params.getValue(params.id, "role") === "admin"
           ? "greenColor"
@@ -82,7 +92,7 @@ const UsersList = () => {
 
     {
       field: "actions",
-      flex: 0.3,
+      flex: 0.5,
       headerName: "Sửa",
       minWidth: 100,
       type: "number",
@@ -115,9 +125,24 @@ const UsersList = () => {
         id: item._id,
         role: item.role,
         email: item.email,
+        lastLogin: String(item.createdAt).substr(0, 10),
         name: item.name,
       });
     });
+
+  // const onRowsSelectionHandler = (ids) => {
+  //   const selectedRowsData = ids.map((id) => rows.find((row) => row.id === id));
+  //   console.log(selectedRowsData);
+  //   return selectedRowsData;
+  // };
+
+  const deleteUserChecked = () => {
+    const ids = [];
+    selectionModel.forEach((d) => {
+      ids.push(d);
+    });
+    dispatch(deleteUserCheck(ids));
+  };
 
   return (
     <Fragment>
@@ -127,7 +152,13 @@ const UsersList = () => {
         <SideBar />
         <div className="productListContainer">
           <h1 id="productListHeading">TẤT CẢ NGƯỜI DÙNG</h1>
-
+          <Button
+            id="createProductBtn"
+            type="submit"
+            onClick={() => deleteUserChecked()}
+          >
+            Xóa
+          </Button>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -135,6 +166,9 @@ const UsersList = () => {
             disableSelectionOnClick
             className="productListTable"
             autoHeight
+            checkboxSelection
+            onSelectionModelChange={setSelectionModel}
+            selectionModel={selectionModel}
           />
         </div>
       </div>

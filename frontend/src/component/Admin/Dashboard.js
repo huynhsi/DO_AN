@@ -121,25 +121,25 @@ const Dashboard = () => {
   let totalcost = 0;
   const barState = {
     labels: [
-      "Size.38",
-      "Size.39",
-      "Size.40",
-      "Size.41",
+      "Size.44",
+      "Size.43",
       "Size.42",
-      "size.43",
-      "size.44",
+      "Size.41",
+      "Size.40",
+      "size.39",
+      "size.38",
     ],
     datasets: [
       {
         label: "SIZE GIAY",
         data: [
-          totalsiz1,
-          totalsiz2,
-          totalsiz3,
-          totalsiz4,
-          totalsiz5,
-          totalsiz6,
           totalsiz7,
+          totalsiz6,
+          totalsiz5,
+          totalsiz4,
+          totalsiz3,
+          totalsiz2,
+          totalsiz1,
         ],
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },

@@ -13,6 +13,7 @@ const {
   getSingleUser,
   updateUserRole,
   deleteUser,
+  deleteUserCheck,
 } = require("../controllers/userController");
 const upload = require("../middleware/upload");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
@@ -54,4 +55,7 @@ router
   )
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
 
+router
+  .route("/admin/user/:id/delete")
+  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUserCheck);
 module.exports = router;

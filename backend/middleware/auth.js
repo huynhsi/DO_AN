@@ -7,7 +7,7 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   const { token } = req.cookies;
 
   if (!token) {
-    return next(new ErrorHander("Moi Dang nhap ", 401));
+    return next(new ErrorHander("Vui Lòng đăng nhập", 401));
   }
 
   const decodedData = jwt.verify(token, process.env.JWT_SECRET);

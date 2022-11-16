@@ -107,6 +107,7 @@
 #registerImage > img {
   width: 3vmax;
   border-radius: 100%;
+  transform: translateY(-17px);
 }
 #registerImage > input {
   display: flex;

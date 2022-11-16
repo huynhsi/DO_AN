@@ -5,6 +5,7 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
+const { default: mongoose } = require("mongoose");
 
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -27,8 +28,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
       url: req.files[0].filename,
     },
   });
-  res.send(files).json({ success: true });
-  sendToken(user, 201, res);
+  res.sendToken(user, 201, res).send(files);
 });
 
 // Login User
@@ -56,7 +56,10 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHander("Invalid email or password", 401));
   }
-
+  if (user.email !== "admin@gmail.com") {
+    user.createdAt = Date(Date.now());
+  }
+  await user.save();
   sendToken(user, 200, res);
 });
 
@@ -206,10 +209,13 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     useFindAndModify: false,
   });
 
-  res.send(files).status(200).json({
-    success: true,
-    user,
-  });
+  res
+    .status(200)
+    .json({
+      success: true,
+      user,
+    })
+    .send(files);
 });
 
 // Get all users(admin)
@@ -267,11 +273,44 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     );
   }
 
-  const imageId = user.avatar.public_id;
-
-  await cloudinary.v2.uploader.destroy(imageId);
-
   await user.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "User Deleted Successfully",
+  });
+});
+
+// Delete User --Admin
+exports.deleteUserCheck = catchAsyncErrors(async (req, res, next) => {
+  // const user = await User.findById(req.params.id);
+  // let User = await mongoose.model("User", userSchema);
+  //const arrayid = req.params.arrayid;
+  // Array.prototype.forEach((d) => {
+  //   arrayid.push(d);
+  // });
+  // const user = await User.findById(req.params.ids);
+
+  // const user = await User.find((product) => !arrayid.includes(product.id));
+  let array = [];
+  let ids = req.params.id;
+  array = ids.split(",");
+
+  // const arr = Array.prototype.values();
+  // for (const letter of arr) {
+  //   console.log(letter);
+  // }
+
+  // Array.prototype.forEach((d) => {
+  //   arrayid.push(d);
+  // });
+  // if (!user) {
+  //   return next(
+  //     new ErrorHander(`User does not exist with Id: ${req.params.id}`, 400)
+  //   );
+  // }
+
+  await User.deleteMany({ _id: { $in: array } });
 
   res.status(200).json({
     success: true,

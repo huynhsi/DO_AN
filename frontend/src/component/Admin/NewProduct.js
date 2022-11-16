@@ -73,7 +73,6 @@ const NewProduct = () => {
       navigate("/admin/dashboard");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
-    // navigate("/admin/products");
   }, [dispatch, navigate, alert, error, success]);
 
   const createProductSubmitHandler = (e) => {
@@ -265,7 +264,7 @@ const NewProduct = () => {
               {/* <StorageIcon /> */}
               <input
                 type="number"
-                placeholder="Stock"
+                placeholder="Kho"
                 required
                 onChange={(e) => setStock(e.target.value)}
               />
@@ -281,7 +280,7 @@ const NewProduct = () => {
               {/* <BadgeIcon className="Icon--tagname"/> */}
               <input
                 type="text"
-                placeholder="Image Name"
+                placeholder="Tên ảnh"
                 required
                 value={nameImages}
                 onChange={(e) => setnameImages(e.target.value)}

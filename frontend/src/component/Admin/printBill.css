@@ -10,6 +10,9 @@
   flex-direction: column;
   height: 100vh;
 }
+.wrapper {
+  margin: 2vmax 6vmax;
+}
 
 @media print {
   /* Your print styles */
@@ -30,8 +33,12 @@
   }
   .speedDialIcon {
     display: none !important;
+    background-color: #fff;
   }
   .MuiFab-label {
+    display: none;
+  }
+  button {
     display: none;
   }
 }

@@ -38,14 +38,6 @@ const Payment = () => {
   const { user } = useSelector((state) => state.user);
   const { error } = useSelector((state) => state.newOrder);
 
-  // thanh toan vnp
-  const onepayIntl = new OnePayInternational({
-    paymentGateway: "https://mtf.onepay.vn/vpcpay/vpcpay.op",
-    merchant: "TESTONEPAY",
-    accessCode: "6BEB2546",
-    secureSecret: "6D0870CDE5F24F34F3915FB0045120DB",
-  });
-
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
   };

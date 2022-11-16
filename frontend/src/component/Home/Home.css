@@ -216,15 +216,15 @@
 /* mau chu item */
 .item > h1 {
   color: rgb(130, 190, 130);
-  opacity: 0.3;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  opacity: 0.8;
+  font-family: inherit;
 }
 .item > p {
   color: black;
-  opacity: 0.4;
+  opacity: 0.7;
   line-height: 40px;
   font-weight: 300;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: fangsong;
 }
 
 .list .item_none {

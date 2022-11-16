@@ -12,13 +12,12 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 import DiscountIcon from "@mui/icons-material/Discount";
+import ReceiptIcon from "@mui/icons-material/Receipt";
 
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <Link to="/">
-        <img src={logo} alt="Ecommerce" />
-      </Link>
+      <Link to="/">{/* <img src={logo} alt="Ecommerce" /> */}</Link>
       <Link to="/admin/dashboard">
         <p>
           <DashboardIcon /> Thống Kê
@@ -61,6 +60,12 @@ const Sidebar = () => {
         <p>
           <RateReviewIcon />
           Đánh Giá
+        </p>
+      </Link>
+      <Link to="/admin/coupon">
+        <p>
+          <ReceiptIcon />
+          Phiếu Nhập
         </p>
       </Link>
     </div>
