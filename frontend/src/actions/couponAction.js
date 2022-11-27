@@ -4,6 +4,10 @@ import {
   NEW_COUPON_SUCCESS,
   NEW_COUPON_FAIL,
   NEW_COUPON_RESET,
+  ALL_COUPON_REQUEST,
+  ALL_COUPON_SUCCESS,
+  ALL_COUPON_FAIL,
+  ALL_COUPON_RESET,
   CLEAR_ERRORS,
 } from "../constants/couponConstants";
 
@@ -31,6 +35,18 @@ export const createCoupon = (couponData) => async (dispatch) => {
       type: NEW_COUPON_FAIL,
       payload: error.response.data.message,
     });
+  }
+};
+
+export const getAllCoupon = () => async (dispatch) => {
+  try {
+    dispatch({ type: ALL_COUPON_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/admin/coupons`);
+
+    dispatch({ type: ALL_COUPON_SUCCESS, payload: data.coupon });
+  } catch (error) {
+    dispatch({ type: ALL_COUPON_FAIL, payload: error.response.data.message });
   }
 };
 

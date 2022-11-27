@@ -43,13 +43,14 @@ export const getProduct =
     currentPage = 1,
     price = [0, 25000],
     category,
-    size1,
-    size2,
-    size3,
-    size4,
-    size5,
-    size6,
-    size7,
+    size1 = 38,
+    size2 = 39,
+    size3 = 40,
+    size4 = 0,
+    size5 = 42,
+    size6 = 43,
+    size7 = 44,
+    discount,
     ratings = 0
   ) =>
   async (dispatch) => {
@@ -63,9 +64,12 @@ export const getProduct =
       }
 
       if (size4) {
-        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&size4[0]=${size4}&ratings[gte]=${ratings}`;
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size4[0]=${size4}`;
       }
-
+      if (discount) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&discount=${discount}`;
+      }
+      console.log(link);
       // if (size1) {
       //   link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size1[0]=${size1}`;
       // }

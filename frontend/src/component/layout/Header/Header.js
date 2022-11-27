@@ -14,15 +14,17 @@ import ReorderIcon from "@mui/icons-material/Reorder";
 import CloseIcon from "@mui/icons-material/Close";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const { cartItems } = useSelector((state) => state.cart);
+
   const navigate = useNavigate();
 
   const [fix, setFix] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [isactive, setActive] = useState(false);
   const [mobile, setMobible] = useState(false);
-  const [cartItem, setCartItem] = useState();
 
   const searchSubmitHandler = (e) => {
     e.preventDefault();
@@ -33,6 +35,23 @@ const Header = () => {
     }
   };
 
+  // const backgroundNav = () => {
+  //   let changetag = document.getElementsByClassName("home__nav");
+  //   changetag[0].classList.toggle("is-active");
+  // };
+  // const backgroundProduct = () => {
+  //   let changetag = document.getElementsByClassName("product__nav");
+  //   changetag[0].classList.toggle("is-active");
+  // };
+  // const backgroundInfo = () => {
+  //   let changetag = document.getElementsByClassName("info__nav");
+  //   changetag[0].classList.toggle("is-active");
+  // };
+  // const backgroundDocument = () => {
+  //   let changetag = document.getElementsByClassName("document__nav");
+  //   changetag[0].classList.toggle("is-active");
+  // };
+
   function setFixed() {
     if (window.scrollY >= 200) {
       setFix(true);
@@ -41,12 +60,6 @@ const Header = () => {
     }
   }
   window.addEventListener("scroll", setFixed);
-
-  const handleClick = (e) => {
-    e.currentTarget.classList.toggle("is-active");
-  };
-
-  var temp = JSON.parse(localStorage["cartItems"]);
 
   return (
     <div className={fix ? "container--header fixed" : "container--header"}>
@@ -64,7 +77,6 @@ const Header = () => {
         <a
           // className={isactive ? "is-active" : ""}
           className="product__nav"
-          onClick={handleClick}
           href="/products"
         >
           SẢN PHẨM
@@ -105,9 +117,7 @@ const Header = () => {
       <div className="shopping__nav">
         <Link to="/cart">
           <ShoppingCartOutlinedIcon className="cartIcon" />
-          <span className="number--on__iconcart">
-            {Object.keys(temp).length}
-          </span>
+          <span className="number--on__iconcart">{cartItems.length}</span>
         </Link>
       </div>
       <button className="mobile-menu-icon">

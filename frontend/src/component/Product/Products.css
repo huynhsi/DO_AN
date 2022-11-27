@@ -90,7 +90,7 @@
 }
 
 /* resposdive */
-@media screen and (max-width: 600) {
+@media screen and (max-width: 600px) {
   .products {
     padding: 0px 0px 0px 10vmax;
   }
@@ -104,5 +104,20 @@
   }
   .category-link {
     font: 400 1.8vmax "Roboto";
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 0px 0px 16vmax;
+    justify-content: center;
+    min-height: 90vh;
+    width: 60%;
+  }
+  .filterBox {
+    position: absolute;
+    width: 10vmax;
   }
 }

@@ -635,55 +635,14 @@
   color: rgb(91, 161, 91);
 }
 .price-tag__discount {
-  background: #000000cc;
-  color: #ffffff;
-  font-size: 10px;
-  /* Center the price */
-  align-items: center;
-  display: flex;
-  justify-content: center;
-
-  /* Used to position the triangle */
+  background: url(../../images/download.svg) no-repeat;
   position: absolute;
-
-  /* Size */
-  height: var(--price-tag-height);
-  width: 25%;
-  left: 0px;
-  top: 0;
-  /* Spacing */
-  padding: 0.25rem 0.5rem;
+  height: 34px;
+  width: 34px;
 }
-/* .price-tag__discount::before {
-  content: "";
-
-  border-color: transparent var(--price-tag-background) transparent transparent;
-  border-style: solid;
-  border-width: calc(var(--price-tag-height) / 2)
-    calc(var(--price-tag-height) / 2) calc(var(--price-tag-height) / 2) 0rem;
-
-  
-  right: 0px;
-  position: absolute;
-  top: 0px;
-  transform: translate(100%, 0px);
-} */
-.price-tag__discount::after {
-  content: "";
-
-  /* Make it like a cirle */
-  background: #fff;
-  border-radius: 9999rem;
-
-  /* Position */
-  right: 0;
-  position: absolute;
-  top: 50%;
-  transform: translate(-0.5rem, -50%);
-
-  /* Size */
-  height: 0.5rem;
-  width: 0.5rem;
+.price-tag__text {
+  font-size: 10px;
+  color: white;
 }
 /* css chuyển động của cart */
 .productCard .productCard--price > span {
@@ -718,7 +677,7 @@
   transform: translate(0px, 0px);
 }
 .productCard:hover .price-tag__discount {
-  transform: translate(0px, -33px);
+  transform: translate(0px, -42px);
 }
 
 .banner--ad__home {
@@ -759,5 +718,11 @@
   .productCard > div > span {
     margin: 0 0.5vmax;
     font: 300 1vmax "Roboto";
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .price-tag__text {
+    margin-top: 13px;
   }
 }

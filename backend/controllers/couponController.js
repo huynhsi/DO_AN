@@ -19,3 +19,12 @@ exports.newCoupon = catchAsyncErrors(async (req, res, next) => {
     coupon,
   });
 });
+
+exports.getAllCoupon = catchAsyncErrors(async (req, res, next) => {
+  const coupon = await Coupon.find();
+
+  res.status(200).json({
+    success: true,
+    coupon,
+  });
+});

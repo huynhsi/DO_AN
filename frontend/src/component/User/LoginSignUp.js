@@ -216,6 +216,7 @@ const LoginSignUp = () => {
                     type="date"
                     required
                     name="name"
+                    placeholder="Ngay sinh"
                     value={birthday}
                     onChange={(e) => setBirthDay(e.target.value)}
                   />

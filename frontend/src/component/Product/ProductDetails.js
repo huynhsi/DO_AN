@@ -136,7 +136,7 @@ const ProductDetails = () => {
 
   const addToCartHandler = () => {
     dispatch(addItemsToCart(id, quantity, size));
-    alert.success("Items Added To Cart");
+    alert.success("Đã thêm vào giỏ");
   };
 
   const submitReviewToggle = () => {

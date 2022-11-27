@@ -31,6 +31,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { loading, error, products } = useSelector((state) => state.products);
   const [current, setCurrent] = useState(0);
+  // const [active, setActive] = useState(0);
 
   useEffect(() => {
     if (error) {
@@ -38,7 +39,7 @@ const Home = () => {
       dispatch(clearErrors());
     }
     dispatch(getProduct());
-  }, [dispatch, error, alert]);
+  }, [dispatch, error, alert, active]);
 
   var count_group = $(".list .item").length;
   var active = 0;
@@ -86,10 +87,12 @@ const Home = () => {
   loadbanner();
   $("#next").on("click", function () {
     active = active + 1 >= count_group ? 0 : active + 1;
+
     loadbanner();
   });
   $("#prev").on("click", function () {
     active = active - 1 < 0 ? count_group - 1 : active - 1;
+
     loadbanner();
   });
 

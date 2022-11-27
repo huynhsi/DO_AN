@@ -356,13 +356,16 @@ const UpdateProduct = () => {
             </div>
             <div className="name__price">
               <DateRangeIcon />
+
               <input
+                value={String(dateStart).substr(0, 10)}
                 type="date"
                 placeholder="Ngày bắt đầu"
                 onChange={(e) => setDateStart(e.target.value)}
               />
 
               <input
+                value={String(dateEnd).substr(0, 10)}
                 type="date"
                 placeholder="Ngày kết thúc"
                 onChange={(e) => setDateEnd(e.target.value)}

@@ -1,5 +1,5 @@
 const express = require("express");
-const { newCoupon } = require("../controllers/couponController");
+const { newCoupon, getAllCoupon } = require("../controllers/couponController");
 
 const upload = require("../middleware/upload");
 const router = express.Router();
@@ -14,5 +14,8 @@ router
     authorizeRoles("admin"),
     newCoupon
   );
+router
+  .route("/admin/coupons")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getAllCoupon);
 
 module.exports = router;

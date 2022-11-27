@@ -4,6 +4,10 @@ import {
   NEW_COUPON_REQUEST,
   NEW_COUPON_RESET,
   NEW_COUPON_SUCCESS,
+  ALL_COUPON_REQUEST,
+  ALL_COUPON_SUCCESS,
+  ALL_COUPON_FAIL,
+  ALL_COUPON_RESET,
 } from "../constants/couponConstants";
 
 export const newCouponReducer = (state = { coupon: {} }, action) => {
@@ -29,6 +33,35 @@ export const newCouponReducer = (state = { coupon: {} }, action) => {
       return {
         ...state,
         success: false,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const allCouponReducer = (state = { coupon: [] }, action) => {
+  switch (action.type) {
+    case ALL_COUPON_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case ALL_COUPON_SUCCESS:
+      return {
+        loading: false,
+        coupon: action.payload,
+      };
+
+    case ALL_COUPON_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
       };
     case CLEAR_ERRORS:
       return {

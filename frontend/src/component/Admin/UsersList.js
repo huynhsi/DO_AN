@@ -130,12 +130,6 @@ const UsersList = () => {
       });
     });
 
-  // const onRowsSelectionHandler = (ids) => {
-  //   const selectedRowsData = ids.map((id) => rows.find((row) => row.id === id));
-  //   console.log(selectedRowsData);
-  //   return selectedRowsData;
-  // };
-
   const deleteUserChecked = () => {
     const ids = [];
     selectionModel.forEach((d) => {

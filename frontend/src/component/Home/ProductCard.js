@@ -26,7 +26,9 @@ const ProductCard = ({ product }) => {
         </span>
       ) : (
         <>
-          <div className="price-tag__discount">{`- ${product.discount} %`}</div>
+          <div className="price-tag__discount">
+            <p className="price-tag__text">{`- ${product.discount}%`}</p>
+          </div>
           <div className="productCard--price">
             <span
               style={{

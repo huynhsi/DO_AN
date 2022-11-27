@@ -8,19 +8,28 @@ import { Button } from "@material-ui/core";
 import FactoryIcon from "@mui/icons-material/Factory";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import InventoryIcon from "@mui/icons-material/Inventory";
+import "./importCoupon.css";
+import PrintIcon from "@mui/icons-material/Print";
 
-import { clearErrors, createCoupon } from "../../actions/couponAction";
+import {
+  clearErrors,
+  createCoupon,
+  getAllCoupon,
+} from "../../actions/couponAction";
 import { NEW_COUPON_RESET } from "../../constants/couponConstants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { DataGrid } from "@material-ui/data-grid";
+import EditIcon from "@material-ui/icons/Edit";
+import { useAlert } from "react-alert";
 
 const ImportCoupon = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const alert = useAlert();
 
-  const { loading, error, success } = useSelector(
-    (state) => state.inportCoupon
-  );
-  // const { loading, error, user } = useSelector((state) => state.userDetails);
+  const { loading, error, success } = useSelector((state) => state.coupon);
+
+  const { coupon } = useSelector((state) => state.allCoupon);
 
   const [category, setCategory] = useState("");
   const [suplier, setSuplier] = useState("");
@@ -47,11 +56,12 @@ const ImportCoupon = () => {
     }
 
     if (success) {
-      alert.success("Coupon Created Successfully");
+      alert.success("Phiếu nhập được tạo thành công");
       navigate("/admin/dashboard");
       dispatch({ type: NEW_COUPON_RESET });
     }
-  }, [dispatch, navigate, alert, error, success]);
+    dispatch(getAllCoupon());
+  }, [dispatch, alert, error, success]);
 
   const categories = [
     "Nike",
@@ -63,17 +73,86 @@ const ImportCoupon = () => {
     "banlenciaga",
   ];
 
+  const columns = [
+    { field: "id", headerName: "ID", minWidth: 100, flex: 0.7 },
+    {
+      field: "nhacc",
+      headerName: "Nhà cung cấp",
+      minWidth: 100,
+      flex: 0.5,
+    },
+
+    {
+      field: "danhmuc",
+      headerName: "Thương hiệu",
+      minWidth: 100,
+      flex: 0.5,
+    },
+    {
+      field: "luong",
+      headerName: "Số lượng",
+      minWidth: 100,
+      flex: 0.5,
+    },
+    {
+      field: "gia",
+      headerName: "Giá",
+      minWidth: 100,
+      flex: 0.5,
+    },
+
+    {
+      field: "ngaytao",
+      headerName: "Ngày tạo",
+      type: "date",
+      minWidth: 100,
+      flex: 0.5,
+    },
+
+    {
+      field: "actions",
+      flex: 0.5,
+      headerName: "In",
+      minWidth: 100,
+      type: "number",
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <Fragment>
+            <Link to="/">
+              <PrintIcon />
+            </Link>
+          </Fragment>
+        );
+      },
+    },
+  ];
+
+  const rows = [];
+
+  coupon &&
+    coupon.forEach((item) => {
+      rows.push({
+        id: item._id,
+        nhacc: item.supplier,
+        danhmuc: item.category,
+        luong: item.amount,
+        gia: item.price,
+        ngaytao: String(item.createdAt).substr(0, 10),
+      });
+    });
+
   return (
     <Fragment>
       <MetaData title="Phiếu nhập hàng" />
       <div className="dashboard">
         <Sidebar />
-        <div className="newProductContainer">
+        <div className="newCouponContainer">
           {loading ? (
             <Loader />
           ) : (
             <form
-              className="createProductForm"
+              className="createCouponForm"
               onSubmit={createCouponSubmitHandler}
             >
               <h1>PHIẾU NHẬP HÀNG</h1>
@@ -92,7 +171,7 @@ const ImportCoupon = () => {
               <div>
                 <AccountTreeIcon />
                 <select onChange={(e) => setCategory(e.target.value)}>
-                  <option value="">Chọn danh mục</option>
+                  <option value="">Chọn thương hiệu</option>
                   {categories.map((cate) => (
                     <option key={cate} value={cate}>
                       {cate}
@@ -123,11 +202,20 @@ const ImportCoupon = () => {
                 />
               </div>
 
-              <Button id="createProductBtn" type="submit">
+              <Button id="createCouponBtn" type="submit">
                 Lưu Phiếu Nhập
               </Button>
             </form>
           )}
+          <h1>TẤT CẢ PHIẾU NHẬP</h1>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={10}
+            disableSelectionOnClick
+            className="productListTable"
+            autoHeight
+          />
         </div>
       </div>
     </Fragment>
