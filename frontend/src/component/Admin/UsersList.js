@@ -147,7 +147,7 @@ const UsersList = () => {
         <div className="productListContainer">
           <h1 id="productListHeading">TẤT CẢ NGƯỜI DÙNG</h1>
           <Button
-            id="createProductBtn"
+            id="createDeleteUserBtn"
             type="submit"
             onClick={() => deleteUserChecked()}
           >

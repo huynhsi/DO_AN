@@ -159,13 +159,10 @@ const Products = () => {
               <li className="category-link" onClick={() => setSize5(42)}>
                 S-42
               </li>
-              <li
-                className="category-link"
-                onClick={() => setSize6(Number(43))}
-              >
+              <li className="category-link" onClick={() => setSize6(43)}>
                 S-43
               </li>
-              <li className="category-link" onClick={() => setDiscount(10)}>
+              <li className="category-link" onClick={() => setSize7(44)}>
                 S-44
               </li>
             </ul>

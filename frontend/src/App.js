@@ -47,6 +47,7 @@ import DocumentPage from "./component/Home/DocumentPage.js";
 import NotFound from "./component/layout/Not Found/NotFound";
 import PrintBill from "./component/Admin/PrintBill";
 import ImportCoupon from "./component/Admin/ImportCoupon";
+import PrintCoupon from "./component/Admin/PrintCoupon.js";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -146,6 +147,8 @@ function App() {
         <Route exact path="/admin/reviews" element={<ProductReviews />} />
 
         <Route exact path="/admin/coupon" element={<ImportCoupon />} />
+
+        <Route exact path="/admin/coupon/:id" element={<PrintCoupon />} />
       </Routes>
       <Footer />
     </Router>

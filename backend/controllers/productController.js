@@ -30,13 +30,12 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.create(req.body);
 
   res
-    .status(201)
+    // .status(201)
     .json({
       success: true,
       product,
     })
-    .send(files)
-    .json({ success: true });
+    .send(files);
 });
 
 // Get All Product
@@ -80,7 +79,7 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
-    return next(new ErrorHander("Product not found", 404));
+    return next(new ErrorHander("Không tìm thấy sản phẩm", 404));
   }
 
   res.status(200).json({
@@ -94,7 +93,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
 
   if (!product) {
-    return next(new ErrorHander("Product not found", 404));
+    return next(new ErrorHander("Không tìm thấy sản phẩm", 404));
   }
 
   // Images Start Here
@@ -103,7 +102,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   const files = await req.files;
 
   if (!files) {
-    const error = new Error("Please choose files");
+    const error = new Error("Vui lòng chọn hình ảnh");
     error.httpStatusCode = 400;
     return next(error);
   }
@@ -138,7 +137,7 @@ exports.updateDiscount = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
 
   if (!product) {
-    return next(new ErrorHander("Product not found", 404));
+    return next(new ErrorHander("Không tìm thấy sản phẩm", 404));
   }
 
   product.discount = req.body.discont;
@@ -154,7 +153,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
-    return next(new ErrorHander("Product not found", 404));
+    return next(new ErrorHander("Không tìm thấy sản phẩm", 404));
   }
 
   await product.remove();
@@ -165,12 +164,26 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+//Delete Product Checked
+exports.deleteProductCheck = catchAsyncErrors(async (req, res, next) => {
+  let array = [];
+  let selectionModel = req.params.id;
+  array = selectionModel.split(",");
+
+  await Product.deleteMany({ _id: { $in: array } });
+
+  res.status(200).json({
+    success: true,
+    message: "Xóa sản phẩm thành công",
+  });
+});
+
 // Delete discount and date
 exports.deleteDiscount = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
-    return next(new ErrorHander("Product not found", 404));
+    return next(new ErrorHander("Không tìm thấy sản phẩm", 404));
   }
 
   req.body.discont = null;
@@ -233,7 +246,7 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.id);
 
   if (!product) {
-    return next(new ErrorHander("Product not found", 404));
+    return next(new ErrorHander("Không tìm thấy sản phẩm", 404));
   }
 
   res.status(200).json({
@@ -247,7 +260,7 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.productId);
 
   if (!product) {
-    return next(new ErrorHander("Product not found", 404));
+    return next(new ErrorHander("Không tìm thấy sản phẩm", 404));
   }
 
   const reviews = product.reviews.filter(

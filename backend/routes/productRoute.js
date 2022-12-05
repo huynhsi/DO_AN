@@ -12,6 +12,7 @@ const {
   getProductReviews,
   deleteReview,
   getAdminProducts,
+  deleteProductCheck,
 } = require("../controllers/productController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 const upload = require("../middleware/upload");
@@ -42,6 +43,10 @@ router
     updateProduct
   )
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct);
+
+router
+  .route("/admin/product/:id/delete")
+  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProductCheck);
 
 router
   .route("/admin/discount/:id")

@@ -23,8 +23,8 @@ const PrintBill = () => {
               <div className="row">
                 <div className="col-12">
                   <h2 className="page-header">
-                    <i className="fas fa-globe"></i> SHOPE_SHOSES.
-                    <small className="float-right">_.2022</small>
+                    SHOPE_SHOSES.
+                    <small>_.2022</small>
                   </h2>
                 </div>
               </div>
@@ -32,6 +32,7 @@ const PrintBill = () => {
               <div className="row invoice-info">
                 <div className="col-sm-4 invoice-col">
                   <address>
+                    <br />
                     <strong>SHOPE_SHOSES.</strong>
                     <br />
                     đường 3/2, phường Xuân Khánh
@@ -48,14 +49,15 @@ const PrintBill = () => {
                 <br />
                 <div className="col-sm-4 invoice-col">
                   <address>
+                    <strong>Địa chỉ nhận hàng</strong>
                     <strong>{order.user && order.user.name}</strong>
                     <br />
                     {order.shippingInfo &&
                       `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.country}`}
                     <br />
-                    {order.shippingInfo && order.shippingInfo.phoneNo}
+                    Phone: {order.shippingInfo && order.shippingInfo.phoneNo}
                     <br />
-                    Email: phuc@gmail.com
+                    {/* Email: phuc@gmail.com */}
                   </address>
                 </div>
                 <br />
@@ -69,8 +71,8 @@ const PrintBill = () => {
               </div>
               <br />
               <div className="row">
-                <div className="col-12 table-responsive">
-                  <table className="table table-striped">
+                <div className="table-responsive">
+                  <table className="table-striped">
                     <thead>
                       <tr>
                         <th>Qty</th>
@@ -88,7 +90,11 @@ const PrintBill = () => {
                             <td>{item.name}</td>
                             <td>{item.size}</td>
 
-                            <td>{(item.price * item.quantity).toFixed(3)}</td>
+                            <td>
+                              {(item.price * item.quantity)
+                                .toFixed(3)
+                                .replace(/\d(?=(\d{3})+\.)/g, "$&.")}
+                            </td>
                           </tr>
                         ))}
                     </tbody>
@@ -106,16 +112,6 @@ const PrintBill = () => {
                           <th>Tax</th>
                           <td>Sản phẩm đã bao gồm thuế.</td>
                         </tr>
-                        {/* <tr>
-                          <th>Subtotal:</th>
-                          <td>
-                            {order.itemsPrice &&
-                              order.itemsPrice
-                                .toFixed(3)
-                                .replace(/\d(?=(\d{3})+\.)/g, "$&.")}
-                            đ
-                          </td>
-                        </tr> */}
                         <tr>
                           <th>Shipping:</th>
                           <td>30.000đ</td>
@@ -146,7 +142,9 @@ const PrintBill = () => {
               </div>
             </section>
           </div>
-          <button onClick={() => window.print()}>Print</button>
+          <button className="button__print" onClick={() => window.print()}>
+            Print
+          </button>
         </div>
       </div>
     </Fragment>

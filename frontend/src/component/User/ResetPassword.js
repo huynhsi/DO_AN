@@ -9,9 +9,8 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
 import { useNavigate } from "react-router-dom";
 
-const ResetPassword = ({match}) => {
-
-    const dispatch = useDispatch();
+const ResetPassword = ({ match }) => {
+  const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
 
@@ -40,60 +39,59 @@ const ResetPassword = ({match}) => {
     }
 
     if (success) {
-      alert.success("Password Updated Successfully");
+      alert.success("Cập nhật mật khẩu thành công");
 
       navigate("/login");
     }
-  }, [dispatch, error, alert,navigate,success]);
-
+  }, [dispatch, error, alert, navigate, success]);
 
   return (
     <Fragment>
-    {loading ? (
-      <Loader />
-    ) : (
-      <Fragment>
-        <MetaData title="Change Password" />
-        <div className="resetPasswordContainer">
-          <div className="resetPasswordBox">
-            <h2 className="resetPasswordHeading">Update Profile</h2>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          <MetaData title="Cập nhật mật khẩu" />
+          <div className="resetPasswordContainer">
+            <div className="resetPasswordBox">
+              <h2 className="resetPasswordHeading">Update Profile</h2>
 
-            <form
-              className="resetPasswordForm"
-              onSubmit={resetPasswordSubmit}
-            >
-              <div>
-                <LockOpenIcon />
+              <form
+                className="resetPasswordForm"
+                onSubmit={resetPasswordSubmit}
+              >
+                <div>
+                  <LockOpenIcon />
+                  <input
+                    type="password"
+                    placeholder="New Password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="loginPassword">
+                  <LockIcon />
+                  <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    required
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                </div>
                 <input
-                  type="password"
-                  placeholder="New Password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  type="submit"
+                  value="Update"
+                  className="resetPasswordBtn"
                 />
-              </div>
-              <div className="loginPassword">
-                <LockIcon />
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  required
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </div>
-              <input
-                type="submit"
-                value="Update"
-                className="resetPasswordBtn"
-              />
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
-      </Fragment>
-    )}
-  </Fragment>
-  )
-}
+        </Fragment>
+      )}
+    </Fragment>
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;

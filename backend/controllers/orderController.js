@@ -82,11 +82,11 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
   if (!order) {
-    return next(new ErrorHander("Order not found with this Id", 404));
+    return next(new ErrorHander("không tìm thấy đơn hàng với Id", 404));
   }
 
   if (order.orderStatus === "Đã nhận") {
-    return next(new ErrorHander("You have already delivered this order", 400));
+    return next(new ErrorHander("Đơn hàng đã được nhận", 400));
   }
 
   if (req.body.status === "Xác nhận đơn hàng") {
@@ -128,7 +128,7 @@ exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
   if (!order) {
-    return next(new ErrorHander("Order not found with this Id", 404));
+    return next(new ErrorHander("Đơn hàng không tìm thấy với Id", 404));
   }
 
   await order.remove();

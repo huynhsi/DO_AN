@@ -69,11 +69,12 @@ const NewProduct = () => {
     }
 
     if (success) {
-      alert.success("Product Created Successfully");
-      navigate("/admin/dashboard");
+      alert.success("Thêm sản phẩm");
+      //navigate("/admin/dashboard");
       dispatch({ type: NEW_PRODUCT_RESET });
+      alert.success("Thành công");
     }
-  }, [dispatch, navigate, alert, error, success]);
+  }, [dispatch, alert, error, success]);
 
   const createProductSubmitHandler = (e) => {
     e.preventDefault();
@@ -252,14 +253,20 @@ const NewProduct = () => {
             </div>
             <div className="name__price">
               <AccountTreeIcon />
-              <select onChange={(e) => setCategory(e.target.value)}>
+              {/* <select onChange={(e) => setCategory(e.target.value)}>
                 <option value="">Chọn danh mục</option>
                 {categories.map((cate) => (
                   <option key={cate} value={cate}>
                     {cate}
                   </option>
                 ))}
-              </select>
+              </select> */}
+              <input
+                type="text"
+                placeholder="Tên Danh Mục"
+                required
+                onChange={(e) => setCategory(e.target.value)}
+              />
 
               {/* <StorageIcon /> */}
               <input

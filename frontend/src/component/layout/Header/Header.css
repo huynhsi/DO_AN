@@ -152,6 +152,15 @@ a {
     display: flex;
     justify-content: space-between;
   }
+  .productCard {
+    height: 220px;
+  }
+  .timeofdiscount {
+    font-size: 6px;
+  }
+  .price-tag__text {
+    margin-top: 11px;
+  }
   .logo__nav {
     display: flex;
   }
@@ -201,7 +210,8 @@ a {
     background-color: #dfe1e5;
   }
   .list img {
-    width: 122% !important;
+    width: 116% !important;
+    margin-top: 140px;
   }
   .brand--logo__img > ul {
     padding: 0px;
@@ -210,7 +220,8 @@ a {
     display: none;
   }
   .next {
-    top: 55%;
+    top: 83%;
+    opacity: 0.3;
   }
   .container {
     top: 33%;

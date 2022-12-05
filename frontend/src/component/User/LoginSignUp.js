@@ -19,7 +19,7 @@ const LoginSignUp = () => {
   const alert = useAlert();
   const location = useLocation();
 
-  const { error, loading, isAuthenticated } = useSelector(
+  const { error, loading, isAuthenticated, message } = useSelector(
     (state) => state.user
   );
 
@@ -29,7 +29,6 @@ const LoginSignUp = () => {
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -38,9 +37,7 @@ const LoginSignUp = () => {
 
   const [birthday, setBirthDay] = useState("");
   const [phone, setPhone] = useState("");
-
   const { name, email, password } = user;
-
   const [avatar, setAvatar] = useState([]);
   const [avatarPreview, setAvatarPreview] = useState([]);
 
@@ -66,23 +63,6 @@ const LoginSignUp = () => {
     });
     dispatch(register(myForm));
   };
-
-  // const registerDataChange = (e) => {
-  //   if (e.target.name === "avatar") {
-  //     const reader = new FileReader();
-
-  //     reader.onload = () => {
-  //       if (reader.readyState === 2) {
-  //         setAvatarPreview(reader.result);
-  //         setAvatar(reader.result);
-  //       }
-  //     };
-
-  //     reader.readAsDataURL(e.target.files[0]);
-  //   } else {
-  //     setUser({ ...user, [e.target.name]: e.target.value });
-  //   }
-  // };
 
   const change = (e) => {
     if (e.target.name === "file") {
@@ -114,13 +94,17 @@ const LoginSignUp = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      alert.success("Thành công");
       dispatch(clearErrors());
     }
     if (isAuthenticated) {
       navigate(redirect);
     }
-  }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
+    if (message) {
+      alert.success("Thành công");
+    }
+    // alert.success("Thành công");
+  }, [dispatch, error, alert, navigate, isAuthenticated, redirect, message]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -176,7 +160,7 @@ const LoginSignUp = () => {
                     onChange={(e) => setLoginPassword(e.target.value)}
                   />
                 </div>
-                <Link to="/password/forgot">Quên mật khẩu ?</Link>
+                {/* <Link to="/password/forgot">Quên mật khẩu ?</Link> */}
                 <input type="submit" value="Đăng nhập" className="loginBtn" />
               </form>
 
@@ -247,6 +231,7 @@ const LoginSignUp = () => {
                 <div id="registerImage">
                   <img src={avatarPreview} alt="" />
                   <input
+                    required
                     type="file"
                     name="file"
                     accept="image/*"

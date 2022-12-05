@@ -55,7 +55,7 @@ const UpdateUser = () => {
     }
 
     if (isUpdated) {
-      alert.success("User Updated Successfully");
+      alert.success("Cập nhật người dùng thành công");
       navigate("/admin/users");
       dispatch({ type: UPDATE_USER_RESET });
     }

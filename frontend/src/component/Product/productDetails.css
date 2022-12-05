@@ -318,8 +318,9 @@ input[type="radio"]:checked + label {
   }
 
   .detailsBlock-1 > h2 {
-    font-size: 2.8vmax;
+    font-size: 3.8vmax;
     text-align: center;
+    margin-bottom: 4px;
   }
 
   .detailsBlock-1 > p {
@@ -363,7 +364,7 @@ input[type="radio"]:checked + label {
     width: 20vmax;
     margin: 3vmax 0;
   }
-  etailsBlock-4 > p .detailsBlock-3 > p {
+  .detailsBlock-4 > p .detailsBlock-3 > p {
     padding: 2.5vmax 0;
     text-align: center;
     font: 400 2vmax "Roboto";
@@ -376,6 +377,7 @@ input[type="radio"]:checked + label {
   .detailsBlock-4 > p {
     font: 300 1.8vmax sans-serif;
     text-align: justify;
+    max-width: 300px;
   }
 
   .submitReview {
@@ -384,11 +386,27 @@ input[type="radio"]:checked + label {
     width: 20vmax;
     margin: 3vmax 0;
   }
+  .reviewCard {
+    width: 20vmax;
+  }
 
   .reviewCard > p {
     font: 600 3vw "Roboto";
   }
   .reviewCardComment {
-    font: 300 5vw cursive;
+    font: 300 3vw cursive;
+  }
+  .date--time__discount {
+    margin-left: 40px;
+  }
+  .deailsBlock--price__new {
+    font-size: 2.2vmax;
+    margin: 2vmax 8vmax 4vmax 8vmax;
+  }
+  .deailsBlock--price__discount {
+    font-size: 2.8vmax;
+  }
+  .v360-image-container {
+    width: 70%;
   }
 }

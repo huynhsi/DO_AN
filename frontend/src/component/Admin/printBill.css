@@ -12,6 +12,27 @@
 }
 .wrapper {
   margin: 2vmax 6vmax;
+  border: 1px solid #cccccc;
+  padding: 2vmax;
+}
+.table-striped {
+  border: 1px solid black;
+  margin: 0 auto;
+  min-width: 570px;
+}
+.table-striped th {
+  border: 1px solid black;
+}
+.table-striped td {
+  border: 1px solid black;
+}
+.table-responsive {
+}
+.page-header {
+  margin-left: 18vmax;
+}
+.invoice {
+  margin-left: 4vmax;
 }
 
 @media print {

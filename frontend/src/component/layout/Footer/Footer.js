@@ -14,9 +14,10 @@ const Footer = () => {
         <h4>VỀ SHOP GIÀY</h4>
         <p>
           Giày Sneaker nam là mẫu giày đang được yêu thích, bán chạy nhất trên
-          thị trường hiện nay. Giày thể thao luôn có 1 vị thế nhất định, vừa
+          thị trường hiện nay. Giày thể thao luôn có 1 vị thế nhất định,
+          {/* vừa
           phong cách nổi bật, cá tính, lịch lãm mà còn bởi sự thuận tiện trong
-          cách phối đồ cũng như là sự phù hợp cho mọi lứa tuổi, mọi giới tính .
+          cách phối đồ cũng như là sự phù hợp cho mọi lứa tuổi, mọi giới tính . */}
         </p>
         {/* <img src={playStore} alt="playstore" />
         <img src={appStore} alt="Appstore" /> */}

@@ -1,0 +1,66 @@
+.namecoupon {
+  display: flex;
+  justify-content: center;
+}
+.time__coupon {
+  margin-left: 40px;
+}
+.address_coupon {
+  margin: 25px auto;
+}
+.address_coupon strong {
+  margin-left: 40px;
+}
+.header__coupon {
+}
+
+.table_content {
+  width: 600px;
+  margin: 30px auto;
+}
+.table_content {
+  border: 1px solid black;
+}
+.table_content th {
+  border: 1px solid black;
+}
+.table_content td {
+  border: 1px solid black;
+}
+
+.button__print {
+  padding: 5px 10px;
+  width: 150px;
+  margin: 0 auto;
+}
+.sign__coupon {
+  margin: 30px auto;
+}
+@media print {
+  /* Your print styles */
+  @page {
+    margin: 0;
+  }
+  body {
+    margin: 1.6cm;
+  }
+  #footer {
+    display: none;
+  }
+  .container--header {
+    display: none;
+  }
+  .sidebar {
+    display: none;
+  }
+  .speedDialIcon {
+    display: none !important;
+    background-color: #fff;
+  }
+  .MuiFab-label {
+    display: none;
+  }
+  button {
+    display: none;
+  }
+}

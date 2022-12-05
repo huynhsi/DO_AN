@@ -11,7 +11,7 @@ const { default: mongoose } = require("mongoose");
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const files = await req.files;
   if (!files) {
-    const error = new Error("Please choose files");
+    const error = new Error("Vui lòng chọn hình ảnh");
     error.httpStatusCode = 400;
     return next(error);
   }
@@ -38,23 +38,23 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   // checking if user has given password and email both
 
   if (!email || !password) {
-    return next(new ErrorHander("Please Enter Email & Password", 400));
+    return next(new ErrorHander("Vui lòng nhập email và mật khẩu", 400));
   }
 
   const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
-    return next(new ErrorHander("Invalid email or password", 401));
+    return next(new ErrorHander("Email hoặc mật khẩu không hợp lệ", 401));
   }
 
   if (user.role === "block") {
-    return next(new ErrorHander("You has been block", 401));
+    return next(new ErrorHander("Tài khoản của bạn đã bị chặn", 401));
   }
 
   const isPasswordMatched = await user.comparePassword(password);
 
   if (!isPasswordMatched) {
-    return next(new ErrorHander("Invalid email or password", 401));
+    return next(new ErrorHander("Email hoặc mật khẩu không hợp lệ", 401));
   }
   if (user.email !== "admin@gmail.com") {
     user.createdAt = Date(Date.now());
@@ -72,7 +72,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "Logged Out",
+    message: "Đã đăng xuất",
   });
 });
 
@@ -81,7 +81,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return next(new ErrorHander("User not found", 404));
+    return next(new ErrorHander("Không tìm thấy người dùng", 404));
   }
 
   // Get ResetPassword Token
@@ -139,7 +139,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   }
 
   if (req.body.password !== req.body.confirmPassword) {
-    return next(new ErrorHander("Password does not password", 400));
+    return next(new ErrorHander("mật khẩu không đúng", 400));
   }
 
   user.password = req.body.password;
@@ -168,11 +168,11 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
   const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
 
   if (!isPasswordMatched) {
-    return next(new ErrorHander("Old password is incorrect", 400));
+    return next(new ErrorHander("Bạn nhập mật khẩu chưa đúng", 400));
   }
 
   if (req.body.newPassword !== req.body.confirmPassword) {
-    return next(new ErrorHander("password does not match", 400));
+    return next(new ErrorHander("Xác nhận mật khẩu chưa đúng", 400));
   }
 
   user.password = req.body.newPassword;
@@ -193,7 +193,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
   const files = await req.files;
   if (!files) {
-    const error = new Error("Please choose files");
+    const error = new Error("Vui lòng chọn hình ảnh");
     error.httpStatusCode = 400;
     return next(error);
   }
@@ -234,7 +234,7 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorHander(`User does not exist with Id: ${req.params.id}`)
+      new ErrorHander(`Người dùng không tồn tại với Id: ${req.params.id}`)
     );
   }
 
@@ -269,7 +269,7 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorHander(`User does not exist with Id: ${req.params.id}`, 400)
+      new ErrorHander(`Người dùng không tồn tại với Id: ${req.params.id}`, 400)
     );
   }
 
@@ -277,43 +277,20 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "User Deleted Successfully",
+    message: "Xóa người dùng thành công",
   });
 });
 
 // Delete User --Admin
 exports.deleteUserCheck = catchAsyncErrors(async (req, res, next) => {
-  // const user = await User.findById(req.params.id);
-  // let User = await mongoose.model("User", userSchema);
-  //const arrayid = req.params.arrayid;
-  // Array.prototype.forEach((d) => {
-  //   arrayid.push(d);
-  // });
-  // const user = await User.findById(req.params.ids);
-
-  // const user = await User.find((product) => !arrayid.includes(product.id));
   let array = [];
   let ids = req.params.id;
   array = ids.split(",");
-
-  // const arr = Array.prototype.values();
-  // for (const letter of arr) {
-  //   console.log(letter);
-  // }
-
-  // Array.prototype.forEach((d) => {
-  //   arrayid.push(d);
-  // });
-  // if (!user) {
-  //   return next(
-  //     new ErrorHander(`User does not exist with Id: ${req.params.id}`, 400)
-  //   );
-  // }
 
   await User.deleteMany({ _id: { $in: array } });
 
   res.status(200).json({
     success: true,
-    message: "User Deleted Successfully",
+    message: "Xóa người dùng thành công",
   });
 });

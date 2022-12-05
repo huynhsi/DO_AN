@@ -170,7 +170,7 @@ const Home = () => {
             </div>
           </div>
           <div className="banner">
-            <div className="container">
+            <div className="container__banner">
               <div className="header"></div>
               <div className="list">
                 <div className="bg-rotate"></div>

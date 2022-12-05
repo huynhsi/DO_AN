@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,6 +6,7 @@ import {
   clearErrors,
   getAdminProduct,
   deleteProduct,
+  deleteProductCheck,
 } from "../../actions/productAction";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
@@ -29,8 +30,14 @@ const ProductList = () => {
     (state) => state.product
   );
 
+  const [selectionModel, setSelectionModel] = useState([]);
+
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id));
+  };
+
+  const deleteProductChecked = () => {
+    dispatch(deleteProductCheck(selectionModel));
   };
 
   useEffect(() => {
@@ -45,7 +52,7 @@ const ProductList = () => {
     }
 
     if (isDeleted) {
-      alert.success("Product Deleted Successfully");
+      alert.success("Xóa sản phẩm thành công");
       navigate("/admin/dashboard");
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
@@ -133,7 +140,13 @@ const ProductList = () => {
         <SideBar />
         <div className="productListContainer">
           <h1 id="productListHeading">Tất cả sản phẩm</h1>
-
+          <Button
+            id="createDeleteUserBtn"
+            type="submit"
+            onClick={() => deleteProductChecked()}
+          >
+            Xóa
+          </Button>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -141,6 +154,9 @@ const ProductList = () => {
             disableSelectionOnClick
             className="productListTable"
             autoHeight
+            checkboxSelection
+            onSelectionModelChange={setSelectionModel}
+            selectionModel={selectionModel}
           />
         </div>
       </div>

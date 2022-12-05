@@ -47,7 +47,7 @@ const ProcessOrder = () => {
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      alert.success("Order Updated Successfully");
+      alert.success("Cập nhật đơn hàng thành công");
       dispatch({ type: UPDATE_ORDER_RESET });
     }
 
@@ -56,7 +56,7 @@ const ProcessOrder = () => {
 
   return (
     <Fragment>
-      <MetaData title="Process Order" />
+      <MetaData title="Xử lý đơn hàng" />
       <div className="dashboard">
         <SideBar />
         <div className="newProductContainer">

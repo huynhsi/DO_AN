@@ -8,6 +8,9 @@ import {
   ALL_COUPON_SUCCESS,
   ALL_COUPON_FAIL,
   ALL_COUPON_RESET,
+  SINGLE_COUPON_REQUEST,
+  SINGLE_COUPON_SUCCESS,
+  SINGLE_COUPON_FAIL,
 } from "../constants/couponConstants";
 
 export const newCouponReducer = (state = { coupon: {} }, action) => {
@@ -63,6 +66,38 @@ export const allCouponReducer = (state = { coupon: [] }, action) => {
         loading: false,
         error: action.payload,
       };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const singleCouponReducer = (state = { coupon: {} }, action) => {
+  switch (action.type) {
+    case SINGLE_COUPON_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SINGLE_COUPON_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        coupon: action.payload,
+      };
+
+    case SINGLE_COUPON_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
     case CLEAR_ERRORS:
       return {
         ...state,

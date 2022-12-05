@@ -10,7 +10,6 @@ const ProductCard = ({ product }) => {
   };
   return (
     <Link className="productCard" to={`/product/${product._id}`}>
-      {/* <img src={product.images[0].url} alt={product.name} /> */}
       <img src={`../images/${product.images[0].url}`} alt={product.name} />
       <p>{product.name}</p>
       <div>
@@ -41,6 +40,10 @@ const ProductCard = ({ product }) => {
                 (product.price * [(100 - product.discount) / 100]).toFixed(3)}
               đ
             </span>
+            <p className="timeofdiscount">
+              {String(product.datestart).substr(0, 10)} -{" "}
+              {String(product.dateend).substr(0, 10)}
+            </p>
           </div>
         </>
       )}

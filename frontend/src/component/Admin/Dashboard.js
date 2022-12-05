@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar.js";
 import "./dashboard.css";
 import { Typography } from "@material-ui/core";
@@ -16,12 +16,28 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   let { products } = useSelector((state) => state.products);
-
   let { orders } = useSelector((state) => state.allOrders);
 
-  let { users } = useSelector((state) => state.allUsers);
+  useEffect(() => {
+    dispatch(getAdminProduct());
+    dispatch(getAllOrders());
+    dispatch(getAllUsers());
+  }, [dispatch]);
 
+  let { users } = useSelector((state) => state.allUsers);
+  const [dateTime, setDateTime] = useState("");
+  const [totalProduct, setTotalProduct] = useState(0);
+  const [totalOrder, setTotalOrder] = useState(0);
+  const [totalUser, setTotalUser] = useState(0);
+
+  let tienhang = 0;
   let outOfStock = 0;
+  let totalAmount = 0;
+
+  products &&
+    products.forEach((item) => {
+      tienhang += item.price;
+    });
 
   products &&
     products.forEach((item) => {
@@ -30,11 +46,47 @@ const Dashboard = () => {
       }
     });
 
-  useEffect(() => {
-    dispatch(getAdminProduct());
-    dispatch(getAllOrders());
-    dispatch(getAllUsers());
-  }, [dispatch]);
+  orders &&
+    orders.forEach((item) => {
+      totalAmount += item.totalPrice;
+    });
+  let tongdanhthu = totalAmount;
+
+  const [danhthu, setDanhThu] = useState(tongdanhthu);
+  let danhthusau = 0;
+  let sanphamsau = 0;
+  let donhangsau = 0;
+  let nguoidungsau = 0;
+
+  const handalDatetime = (e) => {
+    orders &&
+      orders.forEach((item) => {
+        String(dateTime).substr(0, 10) < String(item.createdAt).substr(0, 10) &&
+          (danhthusau += item.totalPrice);
+      });
+    setDanhThu(danhthusau);
+
+    products &&
+      products.forEach((product) => {
+        String(dateTime).substr(0, 10) <
+          String(product.createdAt).substr(0, 10) && (sanphamsau += 1);
+      });
+    setTotalProduct(sanphamsau);
+
+    orders &&
+      orders.forEach((order) => {
+        String(dateTime).substr(0, 10) <
+          String(order.createdAt).substr(0, 10) && (donhangsau += 1);
+      });
+    setTotalOrder(donhangsau);
+
+    users &&
+      users.forEach((user) => {
+        String(dateTime).substr(0, 10) < String(user.createdAt).substr(0, 10) &&
+          (nguoidungsau += 1);
+      });
+    setTotalUser(nguoidungsau);
+  };
 
   let totalsiz1 = 0;
   products &&
@@ -78,29 +130,17 @@ const Dashboard = () => {
       totalsiz7 += item.size7[1];
     });
 
-  let totalAmount = 0;
-  orders &&
-    orders.forEach((item) => {
-      totalAmount += item.totalPrice;
-    });
-
-  let tienhang = 0;
-  products &&
-    products.forEach((item) => {
-      tienhang += item.price;
-    });
-
   const lineState = {
     labels: ["0", "TONG"],
     datasets: [
       {
-        label: "DOANH THU",
+        label: "TIEN HANG",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
         data: [0, totalAmount],
       },
       {
-        label: "TIEN HANG",
+        label: "DOANH THU",
         backgroundColor: ["blue"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
         data: [0, tienhang],
@@ -118,7 +158,6 @@ const Dashboard = () => {
       },
     ],
   };
-  let totalcost = 0;
   const barState = {
     labels: [
       "Size.44",
@@ -158,30 +197,36 @@ const Dashboard = () => {
           type="date"
           name="begin"
           placeholder="dd-mm-yyyy"
-          value=""
           min="2021-01-01"
           max="2022-12-31"
+          onChange={(e) => setDateTime(e.target.value)}
         />
+        <button onClick={handalDatetime}>Thống kê</button>
 
         <div className="dashboardSummary">
           <div>
             <p>
               Tổng Doanh Thu <br />
-              {totalAmount.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, "$&.")}đ
+              {danhthu == 0
+                ? totalAmount.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, "$&.")
+                : danhthu.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, "$&.")}
+              đ
             </p>
           </div>
           <div className="dashboardSummaryBox2">
             <Link to="/admin/products">
               <p>Sẩn phẩm</p>
-              <p>{products && products.length}</p>
+              <p>
+                {totalProduct == 0 ? products && products.length : totalProduct}
+              </p>
             </Link>
             <Link to="/admin/orders">
               <p>Đơn hàng</p>
-              <p>{orders && orders.length}</p>
+              <p>{totalOrder == 0 ? orders && orders.length : totalOrder}</p>
             </Link>
             <Link to="/admin/users">
               <p>Người dùng</p>
-              <p>{users && users.length}</p>
+              <p>{totalUser == 0 ? users && users.length : totalUser}</p>
             </Link>
           </div>
         </div>

@@ -42,7 +42,7 @@ const Shipping = () => {
 
   return (
     <Fragment>
-      <MetaData title="Shipping Details" />
+      <MetaData title="Thông tin giao hàng" />
 
       <CheckoutSteps activeStep={0} />
       <div className="shippingContainer">

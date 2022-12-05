@@ -44,7 +44,7 @@ const UpdatePassword = () => {
     }
 
     if (isUpdated) {
-      alert.success("Profile Updated Successfully");
+      alert.success("Cập nhật thông tin thành công");
 
       navigate("/account");
 
@@ -60,7 +60,7 @@ const UpdatePassword = () => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title="Change Password" />
+          <MetaData title="Cập nhật mật khẩu" />
           <div className="updatePasswordContainer">
             <div className="updatePasswordBox">
               <h2 className="updatePasswordHeading">ĐỔI MẬT KHẨU</h2>

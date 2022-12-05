@@ -119,7 +119,7 @@ const ImportCoupon = () => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to="/">
+            <Link to={`/admin/coupon/${params.getValue(params.id, "id")}`}>
               <PrintIcon />
             </Link>
           </Fragment>

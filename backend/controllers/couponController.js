@@ -28,3 +28,12 @@ exports.getAllCoupon = catchAsyncErrors(async (req, res, next) => {
     coupon,
   });
 });
+
+exports.getSinglecoupon = catchAsyncErrors(async (req, res, next) => {
+  const coupon = await Coupon.findById(req.params.id);
+
+  res.status(200).json({
+    success: true,
+    coupon,
+  });
+});

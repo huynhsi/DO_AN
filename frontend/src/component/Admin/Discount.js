@@ -42,7 +42,7 @@ function Discount() {
     }
 
     if (isDeleted) {
-      alert.success("Discount Deleted Successfully");
+      alert.success("Đã xóa thành công");
       navigate("/admin/discount");
       dispatch({ type: DELETE_DISCOUNT_RESET });
     }

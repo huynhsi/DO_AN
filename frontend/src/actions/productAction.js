@@ -43,13 +43,13 @@ export const getProduct =
     currentPage = 1,
     price = [0, 25000],
     category,
-    size1 = 38,
-    size2 = 39,
-    size3 = 40,
-    size4 = 0,
-    size5 = 42,
-    size6 = 43,
-    size7 = 44,
+    size1,
+    size2,
+    size3,
+    size4,
+    size5,
+    size6,
+    size7,
     discount,
     ratings = 0
   ) =>
@@ -63,20 +63,41 @@ export const getProduct =
         link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
       }
 
+      if (size1) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size1=${[
+          size1,
+        ]}`;
+      }
+      if (size2) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size2=${[
+          size2,
+        ]}`;
+      }
+      if (size3) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size3=${[
+          size3,
+        ]}`;
+      }
       if (size4) {
-        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size4[0]=${size4}`;
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size4=${[
+          size4,
+        ]}`;
       }
-      if (discount) {
-        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&discount=${discount}`;
+      if (size5) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size5=${[
+          size5,
+        ]}`;
       }
-      console.log(link);
-      // if (size1) {
-      //   link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size1[0]=${size1}`;
-      // }
-
-      // if (size4) {
-      //   link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&size4[1]=${size4}&ratings[gte]=${ratings}`;
-      // }
+      if (size6) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size6=${[
+          size6,
+        ]}`;
+      }
+      if (size7) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size7=${[
+          size7,
+        ]}`;
+      }
 
       const { data } = await axios.get(link);
 
@@ -210,6 +231,25 @@ export const deleteProduct = (id) => async (dispatch) => {
     });
   }
 };
+
+//Delete Product Checked
+export const deleteProductCheck = (selectionModel) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_PRODUCT_REQUEST });
+
+    const { data } = await axios.delete(
+      `/api/v1/admin/product/${selectionModel}/delete`
+    );
+
+    dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: DELETE_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 //Delete Discount
 export const deleteDiscount = (id) => async (dispatch) => {
   try {

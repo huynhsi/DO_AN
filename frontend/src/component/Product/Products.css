@@ -64,7 +64,7 @@
   width: 10vmax;
   position: absolute;
   top: 10vmax;
-  left: 4vmax;
+  left: 2vmax;
 }
 .price-bar {
   margin-bottom: 10px;
@@ -92,12 +92,12 @@
 /* resposdive */
 @media screen and (max-width: 600px) {
   .products {
-    padding: 0px 0px 0px 10vmax;
+    padding: 0px 0px 0px 12vmax;
   }
   .filterBox {
-    width: 20vmax;
-    position: static;
-    margin: auto;
+    width: 10vmax;
+    /* position: static;
+    margin: auto; */
   }
   .page-link {
     font: 300 1.7vmax "Roboto";

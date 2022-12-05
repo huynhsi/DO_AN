@@ -20,6 +20,7 @@ import DiscountIcon from "@mui/icons-material/Discount";
 import StraightenIcon from "@mui/icons-material/Straighten";
 import BadgeIcon from "@mui/icons-material/Badge";
 import DateRangeIcon from "@mui/icons-material/DateRange";
+import { set } from "mongoose";
 
 const UpdateProduct = () => {
   const dispatch = useDispatch();
@@ -115,11 +116,20 @@ const UpdateProduct = () => {
     }
 
     if (isUpdated) {
-      alert.success("Product Updated Successfully");
+      alert.success("Cập nhật thành công");
       navigate("/admin/products");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
-  }, [dispatch, alert, error, isUpdated, productId, product, updateError]);
+  }, [
+    dispatch,
+    navigate,
+    alert,
+    error,
+    isUpdated,
+    productId,
+    product,
+    updateError,
+  ]);
 
   const updateProductSubmitHandler = (e) => {
     e.preventDefault();
@@ -315,7 +325,7 @@ const UpdateProduct = () => {
 
             <div className="name__price">
               <AccountTreeIcon />
-              <select
+              {/* <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
@@ -325,11 +335,18 @@ const UpdateProduct = () => {
                     {cate}
                   </option>
                 ))}
-              </select>
+              </select> */}
+              <input
+                type="text"
+                placeholder="Tên Danh Mục"
+                required
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              />
 
               <input
                 type="number"
-                placeholder="Stock"
+                placeholder="Kho"
                 required
                 onChange={(e) => setStock(e.target.value)}
                 value={Stock}

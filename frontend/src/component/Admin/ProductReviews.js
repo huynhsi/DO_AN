@@ -58,7 +58,7 @@ const ProductReviews = () => {
     }
 
     if (isDeleted) {
-      alert.success("Review Deleted Successfully");
+      alert.success("Đã xóa đánh giá");
       navigate("/admin/reviews");
       dispatch({ type: DELETE_REVIEW_RESET });
     }

@@ -41,7 +41,7 @@ const OrderList = () => {
     }
 
     if (isDeleted) {
-      alert.success("Order Deleted Successfully");
+      alert.success("Xóa đơn hàng thành công");
       navigate("/admin/orders");
       dispatch({ type: DELETE_ORDER_RESET });
     }

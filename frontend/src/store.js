@@ -28,7 +28,11 @@ import {
   orderReducer,
 } from "./reducer/orderReducer";
 
-import { allCouponReducer, newCouponReducer } from "./reducer/couponReducer";
+import {
+  allCouponReducer,
+  newCouponReducer,
+  singleCouponReducer,
+} from "./reducer/couponReducer";
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -51,6 +55,7 @@ const reducer = combineReducers({
   review: reviewReducer,
   coupon: newCouponReducer,
   allCoupon: allCouponReducer,
+  singleCoupon: singleCouponReducer,
 });
 
 let initialState = {

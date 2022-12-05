@@ -134,7 +134,17 @@ const ProductDetails = () => {
     setQuantity(qty);
   };
 
+  const checkRadioButton = () => {
+    // let mangradio = document.getElementsByClassName("messageCheckbox").checked;
+    // for (let i = 0; i <= mangradio.length; i++) {
+    //   if (mangradio[i].checked == true) return true;
+    // }
+  };
+
   const addToCartHandler = () => {
+    if (!$("input[name=check]:checked").length > 0) {
+      return alert.error("Vui lòng chọn size");
+    }
     dispatch(addItemsToCart(id, quantity, size));
     alert.success("Đã thêm vào giỏ");
   };
@@ -155,7 +165,7 @@ const ProductDetails = () => {
     }
 
     if (success) {
-      alert.success("Review Submitted Successfully");
+      alert.success("Đánh giá thành công");
       dispatch({ type: NEW_REVIEW_RESET });
     }
     dispatch(getProductDetails(id));
@@ -361,7 +371,7 @@ const ProductDetails = () => {
                   </div>
                   <button
                     id="buttondis"
-                    disabled={product.Stock < 1 ? true : false}
+                    disabled={checkRadioButton == true ? true : false}
                     onClick={addToCartHandler}
                   >
                     Thêm Vào Giỏ

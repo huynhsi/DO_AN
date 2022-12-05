@@ -8,6 +8,9 @@ import {
   ALL_COUPON_SUCCESS,
   ALL_COUPON_FAIL,
   ALL_COUPON_RESET,
+  SINGLE_COUPON_SUCCESS,
+  SINGLE_COUPON_REQUEST,
+  SINGLE_COUPON_FAIL,
   CLEAR_ERRORS,
 } from "../constants/couponConstants";
 
@@ -37,7 +40,7 @@ export const createCoupon = (couponData) => async (dispatch) => {
     });
   }
 };
-
+// get all coupon
 export const getAllCoupon = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_COUPON_REQUEST });
@@ -47,6 +50,21 @@ export const getAllCoupon = () => async (dispatch) => {
     dispatch({ type: ALL_COUPON_SUCCESS, payload: data.coupon });
   } catch (error) {
     dispatch({ type: ALL_COUPON_FAIL, payload: error.response.data.message });
+  }
+};
+
+//get Single Coupon
+export const getSingleCoupon = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: SINGLE_COUPON_REQUEST });
+    const { data } = await axios.get(`/api/v1/admin/coupons/${id}`);
+
+    dispatch({ type: SINGLE_COUPON_SUCCESS, payload: data.coupon });
+  } catch (error) {
+    dispatch({
+      type: SINGLE_COUPON_FAIL,
+      payload: error.response.data.message,
+    });
   }
 };
 

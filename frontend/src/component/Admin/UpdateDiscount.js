@@ -54,7 +54,7 @@ const UpdateDiscount = () => {
     }
 
     if (isUpdated) {
-      alert.success("Updated Discount Successfully");
+      alert.success("Cập nhật giảm giá thành công");
       navigate("/admin/discount");
       dispatch({ type: UPDATE_DISCOUNT_RESET });
     }
