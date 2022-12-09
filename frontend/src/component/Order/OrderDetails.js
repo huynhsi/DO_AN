@@ -51,7 +51,7 @@ const OrderDetails = () => {
                   <p>Địa chỉ:</p>
                   <span>
                     {order.shippingInfo &&
-                      `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.state}, ${order.shippingInfo.pinCode}, ${order.shippingInfo.country}`}
+                      `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.state},  ${order.shippingInfo.country}`}
                   </span>
                 </div>
               </div>
@@ -61,7 +61,7 @@ const OrderDetails = () => {
                   <p
                     className={
                       order.paymentInfo &&
-                      order.paymentInfo.status === "succeeded"
+                      order.paymentInfo.status === "Đã nhận"
                         ? "greenColor"
                         : "redColor"
                     }
@@ -80,6 +80,7 @@ const OrderDetails = () => {
                       order.totalPrice
                         .toFixed(3)
                         .replace(/\d(?=(\d{3})+\.)/g, "$&.")}
+                    đ
                   </span>
                 </div>
               </div>
@@ -109,7 +110,12 @@ const OrderDetails = () => {
                       <img src={`/../images/${item.image}`} alt="Product" />
                       <Link to={`/product/${item.product}`}>
                         {item.name} -- size: {item.size}
-                      </Link>{" "}
+                        {item.discount === 0 ||
+                        item.discount === null ||
+                        item.discount === undefined
+                          ? ""
+                          : `-- Giảm: ${item.discount}%`}
+                      </Link>
                       <span>
                         {`${item.quantity} X ${item.price.toFixed(3)}đ =`}
                         <b>{(item.price * item.quantity).toFixed(3)}đ</b>

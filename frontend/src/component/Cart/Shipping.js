@@ -13,6 +13,7 @@ import { Country, State } from "country-state-city";
 import { useAlert } from "react-alert";
 import CheckoutSteps from "./CheckoutSteps.js";
 import { useNavigate } from "react-router-dom";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 
 const Shipping = () => {
   const dispatch = useDispatch();
@@ -75,7 +76,7 @@ const Shipping = () => {
             </div>
 
             <div>
-              <PinDropIcon />
+              <LocalPhoneIcon />
               <input
                 type="number"
                 placeholder="Phone Number"
@@ -105,7 +106,7 @@ const Shipping = () => {
 
             {country && (
               <div>
-                <TransferWithinAStationIcon />
+                <PinDropIcon />
 
                 <select
                   required

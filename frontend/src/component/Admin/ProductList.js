@@ -61,7 +61,7 @@ const ProductList = () => {
   }, [dispatch, alert, error, deleteError, isDeleted]);
 
   const columns = [
-    { field: "id", headerName: "ID", minWidth: 150, flex: 0.5 },
+    { field: "id", headerName: "ID", minWidth: 150, flex: 0.7 },
 
     {
       field: "name",
@@ -74,14 +74,14 @@ const ProductList = () => {
       headerName: "Khuyến mãi",
       type: "number",
       minWidth: 50,
-      flex: 0.3,
+      flex: 0.5,
     },
     {
       field: "stock",
       headerName: "Kho",
       type: "number",
       minWidth: 50,
-      flex: 0.3,
+      flex: 0.5,
     },
 
     {

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, getGridDateOperators } from "@material-ui/data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -15,6 +15,7 @@ import {
   clearErrors,
 } from "../../actions/orderAction";
 import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
+import { getDatasetAtEvent } from "react-chartjs-2";
 
 const OrderList = () => {
   const dispatch = useDispatch();
@@ -49,8 +50,26 @@ const OrderList = () => {
     dispatch(getAllOrders());
   }, [dispatch, alert, error, deleteError, isDeleted]);
 
+  function takeDate(date) {
+    const datevalue = new Date(date);
+    let day = datevalue.getDate();
+    let month = datevalue.getMonth() + 1;
+    let year = datevalue.getFullYear();
+
+    if (month < 10 && day >= 10) {
+      return day + "-0" + month + "-" + year;
+    } else if (month < 10 && day >= 10) {
+      return "0" + day + "-0" + month + "-" + year;
+    } else if (month >= 10 && day < 10) {
+      return "0" + day + "-" + month + "-" + year;
+    } else if (month >= 10 && day >= 10) {
+      return day + "-" + month + "-" + year;
+    }
+  }
+
   const columns = [
-    { field: "id", headerName: "ID", minWidth: 150, flex: 1 },
+    { field: "id", headerName: "ID", minWidth: 150, flex: 0.7 },
+    { field: "ngaydat", headerName: "Ngày Đặt", minWidth: 100, flex: 0.5 },
 
     {
       field: "status",
@@ -110,11 +129,12 @@ const OrderList = () => {
 
   orders &&
     orders.forEach((item) => {
-      rows.push({
+      rows.unshift({
         id: item._id,
         itemsQty: item.orderItems.length,
-        amount: item.totalPrice.toFixed(3),
+        amount: item.totalPrice.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, "$&."),
         status: item.orderStatus,
+        ngaydat: takeDate(item.createdAt),
       });
     });
 

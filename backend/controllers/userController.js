@@ -197,11 +197,14 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     error.httpStatusCode = 400;
     return next(error);
   }
-
-  newUserData.avatar = {
-    public_id: req.files[0].path,
-    url: req.files[0].filename,
-  };
+  if (files !== null || files !== undefined) {
+    newUserData.avatar = {
+      public_id: req.files[0].path,
+      url: req.files[0].filename,
+    };
+  } else {
+    newUserData.avatar = req.body.avatar;
+  }
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,

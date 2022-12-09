@@ -75,7 +75,7 @@ function App() {
 
   return (
     <Router>
-      <Header />
+      <Header user={user} />
       {isAuthenticated && <UserOptions user={user} />}
 
       {stripeApiKey && (

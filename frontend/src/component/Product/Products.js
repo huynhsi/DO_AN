@@ -131,6 +131,9 @@ const Products = () => {
             />
 
             <Typography>Danh Mục</Typography>
+            <li className="category-link" onClick={() => setDiscount(10)}>
+              Khuyến mãi
+            </li>
             <ul className="categoryBox">
               {categories.map((category) => (
                 <li
@@ -142,6 +145,7 @@ const Products = () => {
                 </li>
               ))}
             </ul>
+
             <Typography>Kích cỡ</Typography>
             <ul className="categoryBox">
               <li className="category-link" onClick={() => setSize1(38)}>

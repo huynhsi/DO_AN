@@ -69,10 +69,9 @@ const NewProduct = () => {
     }
 
     if (success) {
-      alert.success("Thêm sản phẩm");
+      alert.success("Thêm sản phẩm thành công");
       //navigate("/admin/dashboard");
       dispatch({ type: NEW_PRODUCT_RESET });
-      alert.success("Thành công");
     }
   }, [dispatch, alert, error, success]);
 

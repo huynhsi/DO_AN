@@ -50,6 +50,23 @@ function Discount() {
     dispatch(getAdminProduct());
   }, [dispatch, alert, error, deleteError, isDeleted]);
 
+  function takeDate(date) {
+    const datevalue = new Date(date);
+    let day = datevalue.getDate();
+    let month = datevalue.getMonth() + 1;
+    let year = datevalue.getFullYear();
+
+    if (month < 10 && day >= 10) {
+      return day + "-0" + month + "-" + year;
+    } else if (month < 10 && day >= 10) {
+      return "0" + day + "-0" + month + "-" + year;
+    } else if (month >= 10 && day < 10) {
+      return "0" + day + "-" + month + "-" + year;
+    } else if (month >= 10 && day >= 10) {
+      return day + "-" + month + "-" + year;
+    }
+  }
+
   const columns = [
     { field: "id", headerName: "ID", minWidth: 150, flex: 1 },
 
@@ -113,8 +130,8 @@ function Discount() {
           id: item._id,
           name: item.name,
           discount: item.discount,
-          datestart: item.datestart,
-          dateend: item.dateend,
+          datestart: takeDate(item.datestart),
+          dateend: takeDate(item.dateend),
         });
     });
 

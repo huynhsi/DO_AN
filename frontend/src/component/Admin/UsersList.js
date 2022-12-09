@@ -55,6 +55,23 @@ const UsersList = () => {
     dispatch(getAllUsers());
   }, [dispatch, alert, error, deleteError, isDeleted, message]);
 
+  function takeDate(date) {
+    const datevalue = new Date(date);
+    let day = datevalue.getDate();
+    let month = datevalue.getMonth() + 1;
+    let year = datevalue.getFullYear();
+
+    if (month < 10 && day >= 10) {
+      return day + "-0" + month + "-" + year;
+    } else if (month < 10 && day >= 10) {
+      return "0" + day + "-0" + month + "-" + year;
+    } else if (month >= 10 && day < 10) {
+      return "0" + day + "-" + month + "-" + year;
+    } else if (month >= 10 && day >= 10) {
+      return day + "-" + month + "-" + year;
+    }
+  }
+
   const columns = [
     { field: "id", headerName: "ID", minWidth: 100, flex: 0.7 },
 
@@ -121,13 +138,14 @@ const UsersList = () => {
 
   users &&
     users.forEach((item) => {
-      rows.push({
-        id: item._id,
-        role: item.role,
-        email: item.email,
-        lastLogin: String(item.createdAt).substr(0, 10),
-        name: item.name,
-      });
+      item.role !== "admin" &&
+        rows.push({
+          id: item._id,
+          role: item.role === "block" ? "Khóa" : "...",
+          email: item.email,
+          lastLogin: takeDate(item.createdAt),
+          name: item.name,
+        });
     });
 
   const deleteUserChecked = () => {

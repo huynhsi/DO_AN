@@ -442,6 +442,7 @@
   border: none;
   padding: 10px;
   overflow: hidden;
+  background-color: #ffffff3d;
 }
 @media only screen and (max-width: 768px) {
   .container__banner {

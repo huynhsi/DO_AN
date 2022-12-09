@@ -32,7 +32,7 @@ const ConfirmOrder = () => {
 
   const totalPrice = subtotal + shippingCharges;
 
-  const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`;
+  const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.country}`;
 
   const proceedToPayment = () => {
     const data = {
@@ -102,13 +102,36 @@ const ConfirmOrder = () => {
                     <img src={`/../images/${item.image}`} alt="Product" />
                     <Link to={`/product/${item.product}`}>
                       {`${item.name} -- size: ${item.size}`}
+                      <span>
+                        {item.discount === 0 || item.discount === null
+                          ? ""
+                          : `-- Giảm: ${item.discount}%`}
+                      </span>
                     </Link>{" "}
                     <span>
-                      {`${item.quantity} X ${item.price.toFixed(3)}đ =`}
+                      {`${item.quantity} X ${
+                        item.discount === null ||
+                        item.discount === 0 ||
+                        item.discount === undefined
+                          ? item.price.toFixed(3)
+                          : (
+                              item.price * [(100 - item.discount) / 100]
+                            ).toFixed(3)
+                      }đ =`}
                       <b>
-                        {(item.price * item.quantity)
-                          .toFixed(3)
-                          .replace(/\d(?=(\d{3})+\.)/g, "$&.")}
+                        {item.discount === null ||
+                        item.discount === 0 ||
+                        item.discount === undefined
+                          ? (item.price * item.quantity)
+                              .toFixed(3)
+                              .replace(/\d(?=(\d{3})+\.)/g, "$&.")
+                          : (
+                              item.price *
+                              [(100 - item.discount) / 100] *
+                              item.quantity
+                            )
+                              .toFixed(3)
+                              .replace(/\d(?=(\d{3})+\.)/g, "$&.")}
                         đ
                       </b>
                     </span>
@@ -120,7 +143,7 @@ const ConfirmOrder = () => {
         {/*  */}
         <div>
           <div className="orderSummary">
-            <Typography>Tổng Quan Đặt Hàng</Typography>
+            <Typography>Thông Tin Đặt Hàng</Typography>
             <div>
               <div>
                 <p>Giá sản phẩm:</p>
@@ -130,7 +153,7 @@ const ConfirmOrder = () => {
               </div>
               <div>
                 <p>Phí vần chuyển:</p>
-                <span>35.000đ || Miễn phí</span>
+                <span>35.000đ</span>
               </div>
               <div>
                 <p>Giá sản phẩm đã bao gồm thuế</p>

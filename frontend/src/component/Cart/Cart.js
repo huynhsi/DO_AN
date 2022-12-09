@@ -90,7 +90,7 @@ const Cart = () => {
                     </button>
                   </div>
                   <p className="cartSubtotal">{`${
-                    item.discount === null
+                    item.discount === null || item.price === 0
                       ? (item.price * item.quantity).toFixed(3)
                       : (
                           item.price *
@@ -105,18 +105,21 @@ const Cart = () => {
             <div className="cartGrossProfit">
               <div></div>
               <div className="cartGrossProfitBox">
-                <p>{`${cartItems
-                  .reduce(
-                    (acc, item) =>
-                      acc +
-                      item.quantity *
-                        (item.discount === null
-                          ? item.price
-                          : item.price * [(100 - item.discount) / 100]),
-                    0
-                  )
-                  .toFixed(3)
-                  .replace(/\d(?=(\d{3})+\.)/g, "$&.")}d`}</p>
+                <p>
+                  Tổng tiền:{" "}
+                  {`${cartItems
+                    .reduce(
+                      (acc, item) =>
+                        acc +
+                        item.quantity *
+                          (item.discount === null
+                            ? item.price
+                            : item.price * [(100 - item.discount) / 100]),
+                      0
+                    )
+                    .toFixed(3)
+                    .replace(/\d(?=(\d{3})+\.)/g, "$&.")}đ`}
+                </p>
               </div>
               <div></div>
               <div className="checkOutBtn">

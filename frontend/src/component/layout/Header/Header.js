@@ -16,8 +16,9 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
 
-const Header = () => {
+const Header = ({ user }) => {
   const { cartItems } = useSelector((state) => state.cart);
+  const { users } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
 
@@ -34,7 +35,6 @@ const Header = () => {
       navigate("/products");
     }
   };
-
   // const backgroundNav = () => {
   //   let changetag = document.getElementsByClassName("home__nav");
   //   changetag[0].classList.toggle("is-active");
@@ -90,6 +90,7 @@ const Header = () => {
           HƯỚNG DẪN
         </Link>
       </div>
+
       <div className="search__nav">
         <form onSubmit={searchSubmitHandler} className="form__nav">
           <div className="seacrch__input">
@@ -108,6 +109,7 @@ const Header = () => {
           />
         </form>
       </div>
+
       <div className="user__nav">
         <Link to="/login">
           <AccountCircleOutlinedIcon className="boxIcon" />
@@ -117,9 +119,12 @@ const Header = () => {
       <div className="shopping__nav">
         <Link to="/cart">
           <ShoppingCartOutlinedIcon className="cartIcon" />
-          <span className="number--on__iconcart">{cartItems.length}</span>
+          {cartItems.length !== 0 && (
+            <span className="number--on__iconcart">{cartItems.length}</span>
+          )}
         </Link>
       </div>
+
       <button className="mobile-menu-icon">
         {mobile ? (
           <CloseIcon

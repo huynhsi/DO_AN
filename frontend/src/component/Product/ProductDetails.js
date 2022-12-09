@@ -134,13 +134,6 @@ const ProductDetails = () => {
     setQuantity(qty);
   };
 
-  const checkRadioButton = () => {
-    // let mangradio = document.getElementsByClassName("messageCheckbox").checked;
-    // for (let i = 0; i <= mangradio.length; i++) {
-    //   if (mangradio[i].checked == true) return true;
-    // }
-  };
-
   const addToCartHandler = () => {
     if (!$("input[name=check]:checked").length > 0) {
       return alert.error("Vui lòng chọn size");
@@ -170,6 +163,23 @@ const ProductDetails = () => {
     }
     dispatch(getProductDetails(id));
   }, [dispatch, id, error, alert, reviewError, success]);
+
+  function takeDate(date) {
+    const datevalue = new Date(date);
+    let day = datevalue.getDate();
+    let month = datevalue.getMonth() + 1;
+    let year = datevalue.getFullYear();
+
+    if (month < 10 && day >= 10) {
+      return day + "-0" + month + "-" + year;
+    } else if (month < 10 && day >= 10) {
+      return "0" + day + "-0" + month + "-" + year;
+    } else if (month >= 10 && day < 10) {
+      return "0" + day + "-" + month + "-" + year;
+    } else if (month >= 10 && day >= 10) {
+      return day + "-" + month + "-" + year;
+    }
+  }
 
   return (
     <Fragment>
@@ -353,12 +363,9 @@ const ProductDetails = () => {
                         đ
                       </h1>
                       <br />
-                      <span className="date--time__discount">{`Tu ngay ${String(
+                      <span className="date--time__discount">{`Từ ngày ${takeDate(
                         product.datestart
-                      ).substr(0, 10)} đến hết ${String(product.dateend).substr(
-                        0,
-                        10
-                      )}`}</span>
+                      )} đến hết ${takeDate(product.dateend)}`}</span>
                     </Fragment>
                   )}
                 </div>
@@ -369,11 +376,7 @@ const ProductDetails = () => {
                     <input readOnly type="number" value={quantity} />
                     <button onClick={increaseQuantity}>+</button>
                   </div>
-                  <button
-                    id="buttondis"
-                    disabled={checkRadioButton == true ? true : false}
-                    onClick={addToCartHandler}
-                  >
+                  <button id="buttondis" onClick={addToCartHandler}>
                     Thêm Vào Giỏ
                   </button>
                 </div>
@@ -382,18 +385,19 @@ const ProductDetails = () => {
                   Trạng Thái:{" "}
                   <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
                     {product.Stock < 1 ? "Hết hàng" : "Còn hàng"}
+                    {": "}
+                    {`${product.Stock} Sản phẩm`}
                   </b>
                 </p>
-              </div>
-
-              <div className="detailsBlock-4">
-                Mô tả : <p>{product.description}</p>
               </div>
 
               <button onClick={submitReviewToggle} className="submitReview">
                 Đánh Giá
               </button>
             </div>
+          </div>
+          <div className="detailsBlock-4">
+            Mô tả <p>{product.description}</p>
           </div>
 
           <h3 className="reviewsHeading">Đánh Giá</h3>

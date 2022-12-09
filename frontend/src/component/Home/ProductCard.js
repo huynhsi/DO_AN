@@ -8,6 +8,22 @@ const ProductCard = ({ product }) => {
     readOnly: true,
     precision: 0.5,
   };
+  function takeDate(date) {
+    const datevalue = new Date(date);
+    let day = datevalue.getDate();
+    let month = datevalue.getMonth() + 1;
+    let year = datevalue.getFullYear();
+
+    if (month < 10 && day >= 10) {
+      return day + "-0" + month + "-" + year;
+    } else if (month < 10 && day >= 10) {
+      return "0" + day + "-0" + month + "-" + year;
+    } else if (month >= 10 && day < 10) {
+      return "0" + day + "-" + month + "-" + year;
+    } else if (month >= 10 && day >= 10) {
+      return day + "-" + month + "-" + year;
+    }
+  }
   return (
     <Link className="productCard" to={`/product/${product._id}`}>
       <img src={`../images/${product.images[0].url}`} alt={product.name} />
@@ -41,8 +57,8 @@ const ProductCard = ({ product }) => {
               đ
             </span>
             <p className="timeofdiscount">
-              {String(product.datestart).substr(0, 10)} -{" "}
-              {String(product.dateend).substr(0, 10)}
+              {takeDate(product.datestart)} {" đến "}
+              {takeDate(product.dateend)}
             </p>
           </div>
         </>

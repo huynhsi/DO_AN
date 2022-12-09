@@ -15,7 +15,7 @@
 }
 
 .table_content {
-  width: 600px;
+  width: 800px;
   margin: 30px auto;
 }
 .table_content {
@@ -23,6 +23,8 @@
 }
 .table_content th {
   border: 1px solid black;
+  padding: 20px;
+  background-color: rgb(133, 129, 129);
 }
 .table_content td {
   border: 1px solid black;

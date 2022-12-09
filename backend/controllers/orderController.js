@@ -85,7 +85,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("không tìm thấy đơn hàng với Id", 404));
   }
 
-  if (order.orderStatus === "Đã nhận") {
+  if (order.orderStatus === "success") {
     return next(new ErrorHander("Đơn hàng đã được nhận", 400));
   }
 

@@ -90,6 +90,7 @@ const Home = () => {
 
     loadbanner();
   });
+
   $("#prev").on("click", function () {
     active = active - 1 < 0 ? count_group - 1 : active - 1;
 
@@ -294,11 +295,11 @@ const Home = () => {
               </div>
 
               <div className="next">
-                <button id="prev">
+                {/* <button id="prev">
                   <ArrowBackIosIcon id="prev" />
-                </button>
+                </button> */}
                 <button id="next">
-                  <ArrowForwardIosIcon id="next" />
+                  <ArrowForwardIosIcon />
                 </button>
               </div>
             </div>

@@ -27,6 +27,23 @@ const UpdateProfile = () => {
   const [avatar, setAvatar] = useState([]);
   const [avatarPreview, setAvatarPreview] = useState([]);
 
+  function takeDate(date) {
+    const datevalue = new Date(date);
+    let day = datevalue.getDate();
+    let month = datevalue.getMonth() + 1;
+    let year = datevalue.getFullYear();
+
+    if (month < 10 && day >= 10) {
+      return day + "-0" + month + "-" + year;
+    } else if (month < 10 && day >= 10) {
+      return "0" + day + "-0" + month + "-" + year;
+    } else if (month >= 10 && day < 10) {
+      return "0" + day + "-" + month + "-" + year;
+    } else if (month >= 10 && day >= 10) {
+      return day + "-" + month + "-" + year;
+    }
+  }
+
   const updateProfileSubmit = (e) => {
     e.preventDefault();
 
@@ -69,6 +86,7 @@ const UpdateProfile = () => {
       setEmail(user.email);
       setBirthDay(user.birthday);
       setPhone(user.phone);
+      setAvatar(user.avatar);
     }
 
     if (error) {
@@ -131,7 +149,7 @@ const UpdateProfile = () => {
                     type="date"
                     placeholder="Ngày sinh"
                     name="name"
-                    value={birthday}
+                    value={String(birthday).substr(0, 10)}
                     onChange={(e) => setBirthDay(e.target.value)}
                   />
                 </div>

@@ -57,7 +57,6 @@ const PrintBill = () => {
                     <br />
                     Phone: {order.shippingInfo && order.shippingInfo.phoneNo}
                     <br />
-                    {/* Email: phuc@gmail.com */}
                   </address>
                 </div>
                 <br />

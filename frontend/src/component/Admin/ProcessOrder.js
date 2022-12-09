@@ -65,9 +65,9 @@ const ProcessOrder = () => {
           ) : (
             <div
               className="confirmOrderPage"
-              style={{
-                display: order.orderStatus === "Đã nhận" ? "block" : "grid",
-              }}
+              // style={{
+              //   display: order.orderStatus === "Đã nhận" ? "block" : "grid",
+              // }}
             >
               <div>
                 <div className="confirmshippingArea">
@@ -145,12 +145,39 @@ const ProcessOrder = () => {
                         <div key={item.product}>
                           <img src={`/../images/${item.image}`} alt="Product" />
                           <Link to={`/product/${item.product}`}>
-                            {item.name} &nbsp;&nbsp;&nbsp;&nbsp; size:{" "}
-                            {item.size}
+                            {item.name} {" -- "}size: {item.size}
+                            {item.discount === 0 ||
+                            item.discount === null ||
+                            item.discount === undefined
+                              ? ""
+                              : `-- Giảm: ${item.discount}%`}
                           </Link>{" "}
                           <span>
-                            {`${item.quantity} X ${item.price}.đ =`}
-                            <b>{(item.price * item.quantity).toFixed(3)}đ</b>
+                            {`${item.quantity} X ${
+                              item.discount === null ||
+                              item.discount === 0 ||
+                              item.discount === undefined
+                                ? item.price.toFixed(3)
+                                : (
+                                    item.price * [(100 - item.discount) / 100]
+                                  ).toFixed(3)
+                            }đ =`}
+                            <b>
+                              {item.discount === null ||
+                              item.discount === 0 ||
+                              item.discount === undefined
+                                ? (item.price * item.quantity)
+                                    .toFixed(3)
+                                    .replace(/\d(?=(\d{3})+\.)/g, "$&.")
+                                : (
+                                    item.price *
+                                    [(100 - item.discount) / 100] *
+                                    item.quantity
+                                  )
+                                    .toFixed(3)
+                                    .replace(/\d(?=(\d{3})+\.)/g, "$&.")}
+                              đ
+                            </b>
                           </span>
                         </div>
                       ))}
@@ -159,9 +186,9 @@ const ProcessOrder = () => {
               </div>
               {/*  */}
               <div
-                style={{
-                  display: order.orderStatus === "Đã nhận" ? "none" : "block",
-                }}
+              // style={{
+              //   display: order.orderStatus === "Đã nhận" ? "none" : "block",
+              // }}
               >
                 <form
                   className="updateOrderForm"
@@ -177,10 +204,6 @@ const ProcessOrder = () => {
                         <option value="Xác nhận đơn hàng">
                           Xác nhận đơn hàng
                         </option>
-                        // (<option value="Hủy đơn hàng">Hủy đơn hàng</option>),
-                        // (<option value="Đang giao">Đang giao</option>),
-                        // (<option value="Chờ nhận hàng">Chờ nhận hàng</option>),
-                        // (<option value="Đã giao">Đã giao</option>)
                       )}
                       {order.orderStatus === "Đang xử lý" && (
                         <option value="Hủy đơn hàng">Hủy đơn hàng</option>
@@ -188,6 +211,12 @@ const ProcessOrder = () => {
 
                       {order.orderStatus === "Xác nhận đơn hàng" && (
                         <option value="Đang giao">Đang giao</option>
+                      )}
+                      {order.orderStatus === "Đang giao" && (
+                        <option value="Chờ nhận hàng">Chờ nhận hàng</option>
+                      )}
+                      {order.orderStatus === "Chờ nhận hàng" && (
+                        <option value="Đã nhận">Đã nhận</option>
                       )}
                       {order.orderStatus === "Xác nhận đơn hàng" && (
                         <option value="Chờ nhận hàng">Chờ nhận hàng</option>

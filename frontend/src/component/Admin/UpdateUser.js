@@ -94,6 +94,7 @@ const UpdateUser = () => {
                   type="text"
                   placeholder="Tên"
                   required
+                  disabled
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -105,6 +106,7 @@ const UpdateUser = () => {
                   placeholder="Email"
                   required
                   value={email}
+                  disabled
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -113,8 +115,8 @@ const UpdateUser = () => {
                 <VerifiedUserIcon />
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Chọn trạng thái</option>
-                  <option value="user">active</option>
-                  <option value="block">block</option>
+                  <option value="user">Mở khóa</option>
+                  <option value="block">Khóa</option>
                 </select>
               </div>
 

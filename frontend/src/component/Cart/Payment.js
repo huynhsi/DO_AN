@@ -126,7 +126,7 @@ const Payment = () => {
       <CheckoutSteps activeStep={2} />
       <div className="paymentContainer">
         <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
-          <Typography>Thông Tin Giỏ Hàng</Typography>
+          <Typography>Thanh Toán</Typography>
 
           <img src={Stripelogo} />
 
@@ -145,7 +145,9 @@ const Payment = () => {
 
           <input
             type="submit"
-            value={`Pay - ${orderInfo && orderInfo.totalPrice}đ`}
+            value={`Thanh Toán - ${(orderInfo && orderInfo.totalPrice)
+              .toFixed(3)
+              .replace(/\d(?=(\d{3})+\.)/g, "$&.")}đ`}
             ref={payBtn}
             className="paymentFormBtn"
           />

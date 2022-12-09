@@ -41,6 +41,7 @@
 }
 .cartHeader > p {
   margin: 10px;
+  font-size: 15px;
 }
 .cartHeader > p:last-child {
   text-align: end;
@@ -117,7 +118,7 @@
   border: none;
   padding: 0.8vmax 4vmax;
   width: 50%;
-  font: 300 0.8vmax "Roboto";
+  font: 300 1vmax "Roboto";
   margin: 1vmax 4vmax;
   cursor: pointer;
   border-radius: 30px;

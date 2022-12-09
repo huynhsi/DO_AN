@@ -18,16 +18,34 @@ const MyOrders = () => {
   const { loading, error, orders } = useSelector((state) => state.myOrders);
   const { user } = useSelector((state) => state.user);
 
+  function takeDate(date) {
+    const datevalue = new Date(date);
+    let day = datevalue.getDate();
+    let month = datevalue.getMonth() + 1;
+    let year = datevalue.getFullYear();
+
+    if (month < 10 && day >= 10) {
+      return day + "-0" + month + "-" + year;
+    } else if (month < 10 && day >= 10) {
+      return "0" + day + "-0" + month + "-" + year;
+    } else if (month >= 10 && day < 10) {
+      return "0" + day + "-" + month + "-" + year;
+    } else if (month >= 10 && day >= 10) {
+      return day + "-" + month + "-" + year;
+    }
+  }
+
   const columns = [
     { field: "id", headerName: "ID", minWidth: 100, flex: 0.5 },
+    { field: "ngaydat", headerName: "Ngày Đặt", minWidth: 100, flex: 0.5 },
 
     {
       field: "status",
       headerName: "Trạng thái",
       minWidth: 150,
-      flex: 0.5,
+      flex: 0.3,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        return params.getValue(params.id, "status") === "Đã nhận"
           ? "greenColor"
           : "redColor";
       },
@@ -36,7 +54,7 @@ const MyOrders = () => {
       field: "itemsQty",
       headerName: "Số lượng",
       type: "number",
-      minWidth: 150,
+      minWidth: 100,
       flex: 0.3,
     },
 
@@ -45,7 +63,7 @@ const MyOrders = () => {
       headerName: "Thành tiền",
       type: "number",
       minWidth: 100,
-      flex: 0.5,
+      flex: 0.3,
     },
 
     {
@@ -68,9 +86,10 @@ const MyOrders = () => {
 
   orders &&
     orders.forEach((item, index) => {
-      rows.push({
+      rows.unshift({
         itemsQty: item.orderItems.length,
         id: item._id,
+        ngaydat: takeDate(item.createdAt),
         status: item.orderStatus,
         amount: item.totalPrice.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, "$&."),
       });

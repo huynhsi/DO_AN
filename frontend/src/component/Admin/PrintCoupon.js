@@ -41,7 +41,7 @@ function PrintCoupon() {
               Email: huynhsi@gmail.com
             </address>
             <p className="time__coupon">
-              <i>Thời gian nhập: {String(Date.now()).substr(0, 10)}</i>
+              <i>Thời gian nhập: 12/12/2022 </i>
             </p>
             <table className="table_content">
               <thead className="header__coupon">

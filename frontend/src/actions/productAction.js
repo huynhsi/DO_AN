@@ -62,6 +62,9 @@ export const getProduct =
       if (category) {
         link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
       }
+      if (discount) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&discount=${discount}`;
+      }
 
       if (size1) {
         link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&size1=${[

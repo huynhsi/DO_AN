@@ -134,7 +134,7 @@ const Dashboard = () => {
     labels: ["0", "TONG"],
     datasets: [
       {
-        label: "TIEN HANG",
+        label: "TIỀN HÀNG",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
         data: [0, totalAmount],
@@ -170,7 +170,7 @@ const Dashboard = () => {
     ],
     datasets: [
       {
-        label: "SIZE GIAY",
+        label: "SIZE ĐÃ BÁN",
         data: [
           totalsiz7,
           totalsiz6,
