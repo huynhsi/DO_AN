@@ -125,7 +125,7 @@ const Shipping = () => {
             )}
             <input
               type="submit"
-              value="Continue"
+              value="Tiếp Tục"
               className="shippingBtn"
               disabled={state ? false : true}
             />

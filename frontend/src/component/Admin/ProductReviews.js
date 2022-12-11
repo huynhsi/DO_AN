@@ -147,7 +147,7 @@ const ProductReviews = () => {
               <Star />
               <input
                 type="text"
-                placeholder="Product Id"
+                placeholder="Id Sản Phẩm"
                 required
                 value={productId}
                 onChange={(e) => setProductId(e.target.value)}
@@ -155,7 +155,7 @@ const ProductReviews = () => {
             </div>
 
             <Button
-              id="createProductBtn"
+              id="reviewProductBtn"
               type="submit"
               disabled={
                 loading ? true : false || productId === "" ? true : false

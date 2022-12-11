@@ -26,7 +26,7 @@ const Profile = () => {
           <MetaData title={`Thông tin của ${user.name}`} />
           <div className="profileContainer">
             <div>
-              <h1>My Profile</h1>
+              <h1>Thông Tin</h1>
               <img
                 src={`../images/${user.avatar && user.avatar.url}`}
                 alt={user.name}

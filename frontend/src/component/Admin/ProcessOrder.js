@@ -105,8 +105,8 @@ const ProcessOrder = () => {
                       >
                         {order.paymentInfo &&
                         order.paymentInfo.status === "succeeded"
-                          ? "Paid"
-                          : "Not Paid"}
+                          ? "Đã Thanh Toán"
+                          : "Chưa Thanh Toán"}
                       </p>
                     </div>
 

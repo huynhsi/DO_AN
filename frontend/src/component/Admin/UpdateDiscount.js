@@ -107,7 +107,7 @@ const UpdateDiscount = () => {
                 <input
                   type="date"
                   placeholder="Ngày bắt đầu"
-                  value={dateStart}
+                  value={String(dateStart).substr(0, 10)}
                   onChange={(e) => setDateStart(e.target.value)}
                 />
               </div>
@@ -117,7 +117,7 @@ const UpdateDiscount = () => {
                 <input
                   type="date"
                   placeholder="Ngày kết thúc"
-                  value={dateEnd}
+                  value={String(dateEnd).substr(0, 10)}
                   onChange={(e) => setDateEnd(e.target.value)}
                 />
               </div>

@@ -512,6 +512,9 @@
     #dfe1e5 0%,
     #ffffff 90%
   );
+  /* background-color: #e4d6ce;
+  background-image: linear-gradient(62deg, #ebd5c8 0%, #e4dbc4 100%); */
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -94,7 +94,8 @@ const LoginSignUp = () => {
 
   useEffect(() => {
     if (error) {
-      alert.success("Thành công");
+      // alert.error(message);
+      alert.success("Thành Công");
       dispatch(clearErrors());
     }
     if (isAuthenticated) {

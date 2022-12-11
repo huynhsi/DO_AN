@@ -91,7 +91,12 @@ const Header = ({ user }) => {
         </Link>
       </div>
 
-      <div className="search__nav">
+      <div
+        className="search__nav"
+        style={{
+          display: user && user.role === "admin" ? "none" : "block",
+        }}
+      >
         <form onSubmit={searchSubmitHandler} className="form__nav">
           <div className="seacrch__input">
             <input
@@ -116,7 +121,12 @@ const Header = ({ user }) => {
         </Link>
       </div>
 
-      <div className="shopping__nav">
+      <div
+        className="shopping__nav"
+        style={{
+          display: user && user.role === "admin" ? "none" : "block",
+        }}
+      >
         <Link to="/cart">
           <ShoppingCartOutlinedIcon className="cartIcon" />
           {cartItems.length !== 0 && (

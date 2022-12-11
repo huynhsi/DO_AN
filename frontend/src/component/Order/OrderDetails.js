@@ -68,8 +68,8 @@ const OrderDetails = () => {
                   >
                     {order.paymentInfo &&
                     order.paymentInfo.status === "succeeded"
-                      ? "PAID"
-                      : "NOT PAID"}
+                      ? "Đã Thanh Toán"
+                      : "Chưa thanh toán"}
                   </p>
                 </div>
 
@@ -102,7 +102,7 @@ const OrderDetails = () => {
             </div>
 
             <div className="orderDetailsCartItems">
-              <Typography>Order Items:</Typography>
+              <Typography>Sản phẩm đã mua:</Typography>
               <div className="orderDetailsCartItemsContainer">
                 {order.orderItems &&
                   order.orderItems.map((item) => (
@@ -117,8 +117,31 @@ const OrderDetails = () => {
                           : `-- Giảm: ${item.discount}%`}
                       </Link>
                       <span>
-                        {`${item.quantity} X ${item.price.toFixed(3)}đ =`}
-                        <b>{(item.price * item.quantity).toFixed(3)}đ</b>
+                        {`${item.quantity} X ${
+                          item.discount === null ||
+                          item.discount === 0 ||
+                          item.discount === undefined
+                            ? item.price.toFixed(3)
+                            : (
+                                item.price * [(100 - item.discount) / 100]
+                              ).toFixed(3)
+                        }đ =`}
+                        <b>
+                          {item.discount === null ||
+                          item.discount === 0 ||
+                          item.discount === undefined
+                            ? (item.price * item.quantity)
+                                .toFixed(3)
+                                .replace(/\d(?=(\d{3})+\.)/g, "$&.")
+                            : (
+                                item.price *
+                                [(100 - item.discount) / 100] *
+                                item.quantity
+                              )
+                                .toFixed(3)
+                                .replace(/\d(?=(\d{3})+\.)/g, "$&.")}
+                          đ
+                        </b>
                       </span>
                     </div>
                   ))}

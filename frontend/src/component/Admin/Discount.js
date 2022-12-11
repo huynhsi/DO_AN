@@ -81,8 +81,8 @@ function Discount() {
       field: "discount",
       headerName: "% Giảm",
       type: "number",
-      minWidth: 50,
-      flex: 0.4,
+      minWidth: 100,
+      flex: 0.5,
     },
 
     {

@@ -18,6 +18,23 @@ const Dashboard = () => {
   let { products } = useSelector((state) => state.products);
   let { orders } = useSelector((state) => state.allOrders);
 
+  function takeDate(date) {
+    const datevalue = new Date(date);
+    let day = datevalue.getDate();
+    let month = datevalue.getMonth() + 1;
+    let year = datevalue.getFullYear();
+
+    if (month < 10 && day >= 10) {
+      return day + "-0" + month + "-" + year;
+    } else if (month < 10 && day >= 10) {
+      return "0" + day + "-0" + month + "-" + year;
+    } else if (month >= 10 && day < 10) {
+      return "0" + day + "-" + month + "-" + year;
+    } else if (month >= 10 && day >= 10) {
+      return day + "-" + month + "-" + year;
+    }
+  }
+
   useEffect(() => {
     dispatch(getAdminProduct());
     dispatch(getAllOrders());
@@ -194,14 +211,17 @@ const Dashboard = () => {
         <Typography component="h1">Thống Kê</Typography>
         <span>Thời Gian:</span>
         <input
+          className="dataDashboard"
           type="date"
           name="begin"
           placeholder="dd-mm-yyyy"
-          min="2021-01-01"
+          min="2016-01-01"
           max="2022-12-31"
           onChange={(e) => setDateTime(e.target.value)}
         />
-        <button onClick={handalDatetime}>Thống kê</button>
+        <button id="createDeleteUserBtn" onClick={handalDatetime}>
+          Thống kê
+        </button>
 
         <div className="dashboardSummary">
           <div>

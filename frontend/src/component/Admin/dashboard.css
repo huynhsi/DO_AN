@@ -20,6 +20,11 @@
   padding: 1.5rem;
   margin: auto;
 }
+.dataDashboard {
+  padding: 4px 6px;
+  color: #000000a6;
+  border: 1px solid #00000040;
+}
 
 .dashboardSummary {
   margin: 2rem 0;

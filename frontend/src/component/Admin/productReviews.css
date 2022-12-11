@@ -15,6 +15,20 @@
   /* padding: 3vmax; */
   background-color: white;
 }
+#reviewProductBtn {
+  border: none;
+  background-color: tomato;
+  color: white;
+  font: 300 0.9vmax "Roboto";
+  width: 100%;
+  padding: 0.8vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 22%);
+  margin-bottom: 20px;
+}
 
 .productReviewsFormHeading {
   color: rgba(0, 0, 0, 0.733);

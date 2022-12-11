@@ -70,7 +70,7 @@ const NewProduct = () => {
 
     if (success) {
       alert.success("Thêm sản phẩm thành công");
-      //navigate("/admin/dashboard");
+      navigate("/admin/product");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, alert, error, success]);

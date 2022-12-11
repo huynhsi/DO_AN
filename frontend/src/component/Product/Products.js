@@ -192,10 +192,10 @@ const Products = () => {
                 itemsCountPerPage={resultPerPage}
                 totalItemsCount={productsCount}
                 onChange={setCurrentPageNo}
-                nextPageText="Next"
-                prevPageText="Prev"
+                nextPageText=">"
+                prevPageText="<"
                 firstPageText="1st"
-                lastPageText="Last"
+                lastPageText=">>"
                 itemClass="page-item"
                 linkClass="page-link"
                 activeClass="pageItemActive"

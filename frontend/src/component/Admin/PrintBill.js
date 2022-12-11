@@ -12,6 +12,7 @@ const PrintBill = () => {
 
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { error: updateError, isUpdated } = useSelector((state) => state.order);
+
   return (
     <Fragment>
       <MetaData title={`In hóa đơn - Admin`} />
@@ -35,9 +36,9 @@ const PrintBill = () => {
                     <br />
                     <strong>SHOPE_SHOSES.</strong>
                     <br />
-                    đường 3/2, phường Xuân Khánh
+                    Đường 3/2, phường Xuân Khánh
                     <br />
-                    quận Ninh Kiều, tp. Cần Thơ
+                    Quận Ninh Kiều, tp. Cần Thơ
                     <br />
                     Phone: (84) 123-4567
                     <br />
@@ -64,7 +65,7 @@ const PrintBill = () => {
                   <br />
                   <b>Order ID:</b> {order._id && order._id}
                   <br />
-                  <b>Payment Due:</b> {Date.now()}
+                  <b>Payment Due: 10/12/2022</b>
                   <br />
                 </div>
               </div>
@@ -74,10 +75,10 @@ const PrintBill = () => {
                   <table className="table-striped">
                     <thead>
                       <tr>
-                        <th>Qty</th>
+                        <th>Quantity</th>
                         <th>Product</th>
-                        <th>Size #</th>
-
+                        <th>Size</th>
+                        <th>Discount</th>
                         <th>Subtotal</th>
                       </tr>
                     </thead>
@@ -88,7 +89,7 @@ const PrintBill = () => {
                             <td>{item.quantity}</td>
                             <td>{item.name}</td>
                             <td>{item.size}</td>
-
+                            <td>{item.discount !== 0 && item.discount}</td>
                             <td>
                               {(item.price * item.quantity)
                                 .toFixed(3)
